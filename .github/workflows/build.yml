@@ -52,7 +52,8 @@ jobs:
 
           # gli asset del design system devono essere collegati e copiati
           verifica _site/index.html 'bootstrap-italia-tokens.min.css' 'CSS di Bootstrap Italia collegato'
-          verifica _site/index.html 'var(--bi-primary' 'colori esposti come variabili CSS'
+          verifica _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/bootstrap-italia/css/bootstrap-italia-tokens.min.css \
+            'var(--bi-primary' 'colori esposti come variabili CSS'
           verifica _site/index.html 'bootstrap-italia.bundle.min.js' 'JavaScript del design system collegato'
           verifica _site/index.html '<symbol id="it-pa"' 'sprite delle icone inserito nella pagina'
           test -f _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/fonts.css \
