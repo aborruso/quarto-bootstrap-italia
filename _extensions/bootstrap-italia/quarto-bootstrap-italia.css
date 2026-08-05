@@ -288,3 +288,30 @@ main pre.numberSource code > span > a:first-child::before {
   border-right: 1px solid #d9dadb;
   user-select: none;
 }
+
+/* --- tabelle senza la classe .table -------------------------------------- */
+
+/* Il filtro del tema aggiunge `.table` alle tabelle che passano dall'albero di
+   Pandoc, ma non a quelle che Quarto trasforma prima (per esempio con
+   `tbl-colwidths`) né a quelle che arrivano come HTML grezzo, come gli output
+   di knitr e Jupyter. Qui ricevono lo stesso trattamento. */
+
+main table:not(.table) {
+  width: 100%;
+  margin-bottom: 1rem;
+  vertical-align: top;
+  border-color: var(--bs-border-color, #d9dadb);
+}
+
+main table:not(.table) > :not(caption) > * > * {
+  padding: 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--bs-border-color, #d9dadb);
+}
+
+main table:not(.table) > thead {
+  vertical-align: bottom;
+}
+
+main table:not(.table) > tbody {
+  vertical-align: inherit;
+}

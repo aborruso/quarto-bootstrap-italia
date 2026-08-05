@@ -4,6 +4,8 @@ Formato Quarto che veste siti e documenti HTML con [Bootstrap Italia](https://it
 
 Il Bootstrap incluso da Quarto viene rimosso del tutto (`theme: none`) e sostituito da Bootstrap Italia 2.18.3, con font, icone e JavaScript del design system già collegati.
 
+Sito di esempio e guida: <https://aborruso.github.io/quarto-bootstrap-italia/>
+
 ## Installazione
 
 ```bash

@@ -1,0 +1,207 @@
+---
+title: "Installazione e uso"
+subtitle: "Come mettere Bootstrap Italia in un documento o in un sito Quarto"
+toc: true
+---
+
+## Che cosa serve
+
+**Quarto 1.10 o successivo**. Si scarica da [quarto.org](https://quarto.org/docs/download/) per
+Windows, macOS e Linux; per verificare la versione installata:
+
+```bash
+quarto --version
+```
+
+Il tema usa la fase `pre-ast` per i filtri e `quarto.project.offset`, ed è stato verificato su
+1.10.18. Non serve nient'altro: Bootstrap Italia, i font e le icone arrivano con l'estensione.
+
+## Installare l'estensione
+
+Dentro la cartella del progetto:
+
+```bash
+quarto add aborruso/quarto-bootstrap-italia
+```
+
+Quarto chiede conferma e crea la cartella `_extensions/bootstrap-italia/`. È una cartella come le
+altre del progetto: va messa sotto controllo di versione insieme al resto.
+
+## Usarlo in un documento singolo
+
+Basta dichiarare il formato nell'intestazione del file:
+
+``` yaml
+---
+title: "Relazione annuale"
+format:
+  bootstrap-italia-html: default
+---
+```
+
+Il documento esce con la tipografia, i colori e i componenti del design system. Il file HTML
+prodotto ha bisogno della cartella degli asset che gli sta accanto: per spostarlo altrove, si
+portano entrambi.
+
+## Usarlo in un sito
+
+Nel `_quarto.yml` del progetto:
+
+``` yaml
+project:
+  type: website
+
+format:
+  bootstrap-italia-html:
+    include-before-body: partials/header.html
+    include-after-body: partials/footer.html
+```
+
+I due partial contengono l'intestazione e il piè di pagina istituzionali. Nel mezzo devono aprire
+e chiudere questa struttura:
+
+``` html
+<!-- alla fine di partials/header.html -->
+<div id="quarto-content">
+<main id="main-content" class="content container my-5">
+```
+
+``` html
+<!-- all'inizio di partials/footer.html -->
+</main>
+</div>
+```
+
+::: {.callout-important title="Non è decorativa"}
+Quarto usa `<main>` e `#quarto-content main.content` per collocare quello che genera. Senza
+`<main>` non costruisce l'indice di ricerca; senza `#quarto-content main.content` appende gli
+elenchi (`listing:`) in fondo alla pagina, fuori dal contenitore.
+:::
+
+## Partire da un sito già pronto
+
+Il modo più rapido è copiare l'esempio, che comprende `_quarto.yml`, la home, i partial di
+intestazione e piè di pagina e una pagina di elenco:
+
+```bash
+quarto use template aborruso/quarto-bootstrap-italia
+```
+
+Poi si sostituiscono i segnaposto: nome dell'ente, voci di menu, contatti, collegamenti del piè di
+pagina. Le pagine di esempio (`demo.qmd`, la cartella `img/`) si possono cancellare.
+
+## Le icone
+
+Lo sprite delle 179 icone del design system è già dentro ogni pagina, quindi un'icona si richiama
+con un riferimento interno, senza percorsi:
+
+``` html
+<svg class="icon"><use href="#it-search"></use></svg>
+```
+
+I nomi sono quelli della
+[documentazione delle icone](https://italia.github.io/bootstrap-italia/docs/utilities/icone/).
+In un documento che non usa icone lo sprite si toglie:
+
+``` yaml
+bootstrap-italia-sprites: false
+```
+
+## La ricerca
+
+Quarto costruisce l'indice `search.json` per ogni sito; l'estensione ci mette sopra
+un'interfaccia con i componenti del design system. Serve che la ricerca sia attiva — `search: true`
+in `_quarto.yml`, che è il valore predefinito — e che nella pagina ci sia un elemento con
+l'attributo `data-bi-search`:
+
+``` html
+<a class="search-link rounded-icon" href="#" aria-label="Cerca nel sito" data-bi-search>
+  <svg class="icon"><use href="#it-search"></use></svg>
+</a>
+```
+
+Si può aprire anche da codice, con `window.biOpenSearch()`.
+
+## I contenuti
+
+Si scrive Quarto normale: la sintassi standard produce i componenti del design system.
+
+| Si scrive | Si ottiene |
+|---|---|
+| `::: {.callout-note}` e le altre varianti | il callout di Bootstrap Italia, con icona e colore |
+| una tabella Markdown | la tabella del design system |
+| `![didascalia](img.svg){#fig-x}` | figura e didascalia, riferimenti incrociati compresi |
+| `::: {.panel-tabset}` | le schede |
+| `listing:` | elenco di articoli con data, titolo e descrizione |
+| `toc: true` | l'indice della pagina |
+| blocchi di codice, `.numberLines`, `code-fold` | riquadri con numeri di riga e pulsante di copia |
+| `$…$` e `$$…$$` | formule in MathML, senza librerie esterne |
+
+: Contenuti Quarto e resa nel design system {tbl-colwidths="[45,55]"}
+
+Le classi di Bootstrap Italia si usano direttamente nei div fenced, quando serve qualcosa in più:
+
+``` markdown
+::: {.card-wrapper .card-space}
+::: {.card .card-bg}
+::: {.card-body}
+<h3 class="card-title h5">Titolo</h3>
+<p class="card-text">Testo della card.</p>
+:::
+:::
+:::
+```
+
+La pagina [Contenuti Quarto](/demo.html) mostra tutti questi casi resi.
+
+## Personalizzare lo stile
+
+Bootstrap Italia arriva già compilato, quindi si sovrascrive con un foglio di stile proprio,
+caricato dopo:
+
+``` yaml
+format:
+  bootstrap-italia-html:
+    css: mio-stile.css
+```
+
+Non si può usare SCSS: Quarto lo compila solo attraverso l'opzione `theme`, che rimetterebbe il
+suo Bootstrap sopra quello del design system. Per cambiare i colori istituzionali si ricompila
+Bootstrap Italia a monte e si sostituisce il CSS dell'estensione.
+
+## Verificare l'accessibilità
+
+Quarto 1.10 include axe-core e sa produrre il report da solo, senza rete:
+
+``` yaml
+axe:
+  output: document
+  standard: wcag21aa
+```
+
+Con `output: document` le violazioni compaiono in un riquadro sulla pagina; con `output: json`
+finiscono nella console del browser. Conviene tenerlo in un profilo a parte, con una cartella di
+uscita propria, così non finisce nelle pagine pubblicate:
+
+``` yaml
+# _quarto-a11y.yml
+project:
+  output-dir: _a11y
+
+axe:
+  output: json
+  standard: wcag21aa
+```
+
+```bash
+quarto render --profile a11y
+```
+
+## Aggiornare
+
+```bash
+quarto update aborruso/quarto-bootstrap-italia
+```
+
+Dopo un aggiornamento conviene rigenerare la pagina dei contenuti e ricontrollare l'accessibilità:
+il tema si appoggia a parti interne di Quarto che possono cambiare senza preavviso.
