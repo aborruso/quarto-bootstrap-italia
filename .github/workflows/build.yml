@@ -27,6 +27,13 @@ jobs:
         with:
           version: 1.10.18
 
+      - name: Il CSS con i token è allineato al sorgente
+        run: |
+          python3 scripts/genera-token.py
+          git diff --exit-code -- _extensions/bootstrap-italia/bootstrap-italia/css/bootstrap-italia-tokens.min.css \
+            || { echo "FALLITO il CSS dei token non corrisponde: rieseguire scripts/genera-token.py"; exit 1; }
+          echo "ok      CSS dei token allineato"
+
       - name: Render del sito
         run: quarto render
 
@@ -44,7 +51,8 @@ jobs:
           }
 
           # gli asset del design system devono essere collegati e copiati
-          verifica _site/index.html 'bootstrap-italia.min.css' 'CSS di Bootstrap Italia collegato'
+          verifica _site/index.html 'bootstrap-italia-tokens.min.css' 'CSS di Bootstrap Italia collegato'
+          verifica _site/index.html 'var(--bi-primary' 'colori esposti come variabili CSS'
           verifica _site/index.html 'bootstrap-italia.bundle.min.js' 'JavaScript del design system collegato'
           verifica _site/index.html '<symbol id="it-pa"' 'sprite delle icone inserito nella pagina'
           test -f _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/fonts.css \

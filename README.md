@@ -133,17 +133,43 @@ Un filtro Lua li riscrive con il markup di Bootstrap Italia, che è diverso da q
 
 Un div fenced con classe `callout` scritto a mano viene invece intercettato dai callout nativi di Quarto e trasformato in un blockquote: se serve il markup grezzo, va messo in un blocco ```` ```{=html} ````.
 
-## Personalizzare lo stile
+## Colori istituzionali
 
-Bootstrap Italia arriva già compilato: si sovrascrive con un CSS proprio, caricato dopo.
+Bootstrap Italia arriva compilato, con i colori scritti come valori fissi: il blu istituzionale compare oltre duecento volte e non c'è nessuna variabile da sovrascrivere. L'estensione include una versione del CSS in cui ogni colore del design system è diventato una variabile, quindi la palette si cambia in un foglio di stile proprio:
+
+```css
+:root {
+  --bi-primary: #7A0026;
+  --bi-primary-600: #6B0022;
+  --bi-primary-700: #5C001D;
+  --bi-primary-800: #4D0018;
+  --bi-primary-900: #3D0013;
+}
+```
 
 ```yaml
 format:
   bootstrap-italia-html:
-    css: mio-stile.css
+    css: colori-ente.css
 ```
 
-Non è possibile usare SCSS: in Quarto lo SCSS viene compilato solo attraverso l'opzione `theme`, che reintrodurrebbe il Bootstrap di Quarto sopra a quello di Bootstrap Italia. Per cambiare i colori istituzionali si ricompila Bootstrap Italia a monte, dai suoi sorgenti SCSS, e si sostituisce il CSS dell'estensione.
+Cambiano insieme intestazione, menu, piè di pagina, collegamenti, bottoni, callout e tutto il resto. Le variabili disponibili:
+
+| Variabile | Valore | Dove si vede |
+| --- | --- | --- |
+| `--bi-primary` | `#0066CC` | intestazione, collegamenti, bottoni |
+| `--bi-primary-050` … `--bi-primary-900` | dal `#EBF2FA` al `#003366` | sfondi tenui, stati attivi, piè di pagina |
+| `--bi-primary-dark`, `--bi-primary-darker` | `#17324D`, `#0F3757` | testi e fondali scuri |
+| `--bi-secondary`, `--bi-secondary-dark`, `--bi-secondary-darker` | `#5D7083`, `#435A70`, `#37424D` | testi secondari |
+| `--bi-success`, `--bi-warning`, `--bi-danger` | `#008055`, `#995C00`, `#CC334D` | callout e messaggi |
+| `--bi-border`, `--bi-border-light` | `#C5C7C9`, `#D8D9DA` | bordi e separatori |
+| `--bi-text` | `#1A1A1A` | testo corrente |
+
+Cambiando la palette va controllato il contrasto: le combinazioni del design system sono verificate, le proprie no. Il [profilo di accessibilità](#controllare-laccessibilità) segnala i contrasti insufficienti.
+
+Il file è generato da `scripts/genera-token.py`, che rilegge il CSS ufficiale e sostituisce i colori confrontandoli sui valori RGB, qualunque sia la notazione. Va rieseguito quando si aggiorna Bootstrap Italia.
+
+Non è possibile usare SCSS: in Quarto lo SCSS viene compilato solo attraverso l'opzione `theme`, che reintrodurrebbe il Bootstrap di Quarto sopra a quello di Bootstrap Italia.
 
 ## Cosa resta di Quarto
 

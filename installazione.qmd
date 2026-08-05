@@ -154,20 +154,53 @@ Le classi di Bootstrap Italia si usano direttamente nei div fenced, quando serve
 
 La pagina [Contenuti Quarto](/demo.html) mostra tutti questi casi resi.
 
-## Personalizzare lo stile
+## I colori dell'ente
 
-Bootstrap Italia arriva già compilato, quindi si sovrascrive con un foglio di stile proprio,
-caricato dopo:
+Bootstrap Italia arriva compilato, con i colori scritti come valori fissi: il blu istituzionale
+compare oltre duecento volte e non c'è nessuna variabile da sovrascrivere. L'estensione include
+una versione del CSS in cui ogni colore del design system è diventato una variabile, quindi per
+cambiare la palette basta un foglio di stile proprio:
+
+``` css
+/* colori-ente.css */
+:root {
+  --bi-primary: #7A0026;
+  --bi-primary-600: #6B0022;
+  --bi-primary-700: #5C001D;
+  --bi-primary-800: #4D0018;
+  --bi-primary-900: #3D0013;
+}
+```
 
 ``` yaml
 format:
   bootstrap-italia-html:
-    css: mio-stile.css
+    css: colori-ente.css
 ```
 
-Non si può usare SCSS: Quarto lo compila solo attraverso l'opzione `theme`, che rimetterebbe il
-suo Bootstrap sopra quello del design system. Per cambiare i colori istituzionali si ricompila
-Bootstrap Italia a monte e si sostituisce il CSS dell'estensione.
+Cambiano insieme intestazione, menu, piè di pagina, collegamenti, bottoni e callout.
+
+| Variabile | Valore | Dove si vede |
+|---|---|---|
+| `--bi-primary` | `#0066CC` | intestazione, collegamenti, bottoni |
+| `--bi-primary-050` … `--bi-primary-900` | dal `#EBF2FA` al `#003366` | sfondi tenui, stati attivi, piè di pagina |
+| `--bi-primary-dark`, `--bi-primary-darker` | `#17324D`, `#0F3757` | testi e fondali scuri |
+| `--bi-secondary` e varianti | `#5D7083` … | testi secondari |
+| `--bi-success`, `--bi-warning`, `--bi-danger` | `#008055`, `#995C00`, `#CC334D` | callout e messaggi |
+| `--bi-border`, `--bi-border-light` | `#C5C7C9`, `#D8D9DA` | bordi e separatori |
+| `--bi-text` | `#1A1A1A` | testo corrente |
+
+: Le variabili dei colori {tbl-colwidths="[32,28,40]"}
+
+::: {.callout-warning title="Il contrasto va ricontrollato"}
+Le combinazioni di colore del design system sono verificate; una palette diversa no. Dopo il
+cambio conviene rieseguire il controllo di accessibilità descritto più avanti: segnala i
+contrasti insufficienti.
+:::
+
+Per interventi più fini si carica un CSS proprio, che si sovrappone al resto. Non si può invece
+usare SCSS: Quarto lo compila solo attraverso l'opzione `theme`, che rimetterebbe il suo Bootstrap
+sopra quello del design system.
 
 ## Verificare l'accessibilità
 

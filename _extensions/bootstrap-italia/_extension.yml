@@ -13,7 +13,9 @@ contributes:
       html-math-method: mathml
       anchor-sections: false
       css:
-        - bootstrap-italia/css/bootstrap-italia.min.css
+        # Bootstrap Italia con i colori esposti come variabili CSS (--bi-…),
+        # generato da scripts/genera-token.py
+        - bootstrap-italia/css/bootstrap-italia-tokens.min.css
         - fonts.css
         - quarto-bootstrap-italia.css
       # senza il tema di Quarto il title block esce senza la classe che Quarto si
