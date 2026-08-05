@@ -113,21 +113,22 @@ Verifiche fatte:
 
 ## Cosa resta da fare
 
-### Per poter dire ad altri «installatelo»
+### Fatto
 
-- [ ] Creare il repository `aborruso/quarto-bootstrap-italia` e fare il primo push
-- [ ] Verificare `quarto add` e `quarto use template` **dal remoto**: finora provati solo da locale
-- [ ] CI su GitHub Actions: render del sito + `--profile a11y`, con esito negativo se compare una violazione o se la demo perde pezzi. È il presidio contro le rotture silenziose: il tema si aggancia a dettagli interni di Quarto (`#quarto-content main.content`, `canonicalizeTitlePostprocessor`, `at: pre-ast`, `quarto.project.offset`) che non sono contratto pubblico
-- [ ] Confermare la licenza: `LICENSE` è BSD-3-Clause a nome di Andrea Borruso, scelta per coerenza con Bootstrap Italia che il tema ridistribuisce
+- [x] Repository `aborruso/quarto-bootstrap-italia` pubblicato, sito su GitHub Pages
+- [x] CI su GitHub Actions: render, controlli di regressione sull'output, accessibilità WCAG 2.1 AA con Playwright, pubblicazione. Se un controllo non passa, il sito non viene pubblicato
+- [x] Licenza BSD-3-Clause confermata
+- [x] Home che presenta il progetto e spiega cos'è Quarto; pagina di guida all'installazione e all'uso
+- [x] **Colori istituzionali**: `scripts/genera-token.py` riscrive ogni colore del design system come `var(--bi-…)`, la palette si cambia con cinque righe di CSS
 
-### Compatibilità non ancora verificata
+### Aperto — tracciato su GitHub
 
-- [ ] **Output di codice eseguito** (knitr/jupyter): tabelle `df-print`, grafici, output delle celle. È il caso d'uso principale di Quarto e qui è un buco. Sospetto concreto: le tabelle prodotte da pandas o knitr arrivano come HTML grezzo e non passano dal filtro `Table`, quindi restano senza la classe `.table`
+- [ ] [#1](https://github.com/aborruso/quarto-bootstrap-italia/issues/1) Verificare `quarto add` e `quarto use template` **dal remoto**: il percorso di installazione non è mai stato eseguito per intero
+- [ ] [#2](https://github.com/aborruso/quarto-bootstrap-italia/issues/2) Verificare l'output di codice eseguito (knitr e Jupyter): tabelle `df-print`, grafici, output delle celle
+
+### Altro da fare
+
 - [ ] Pagine `about`, modalità scura, stampa, browser diversi da Chrome
-
-### Prodotto
-
-- [ ] **Colori istituzionali**: oggi cambiarli richiede di ricompilare Bootstrap Italia dai sorgenti SCSS. Per il profilo di utente descritto nel PRD è troppo: serve almeno la procedura documentata passo passo, o valutare di esporre i design token come variabili CSS sovrascrivibili
 - [ ] **Ricerca**: il ranking è elementare (sottostringa, niente fuzzy né stemming) e non evidenzia i termini trovati
 - [ ] **Bootstrap Italia 3.x**: oggi in beta (3.0.0-beta.4), da affrontare quando esce stabile
 - [ ] Il partial `title-block.html` è essenziale: non mostra autori con ORCID né altri metadati ricchi. Da estendere se servirà
