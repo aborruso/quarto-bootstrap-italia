@@ -9,11 +9,27 @@ comporta il tema in un sito istituzionale. Il progetto è
 [quarto-bootstrap-italia](https://github.com/aborruso/quarto-bootstrap-italia).
 :::
 
-## Cos'è
+## Quarto in breve
 
-Una **estensione di Quarto** che sostituisce il tema Bootstrap predefinito con
-[Bootstrap Italia](https://italia.github.io/bootstrap-italia/) 2.18.3, il framework del design
-system `.italia` conforme alle
+[Quarto](https://quarto.org) è un programma libero per pubblicare documenti e siti. Si scrivono i
+contenuti in Markdown — testo semplice, con una manciata di convenzioni per titoli, elenchi e
+collegamenti — e da quegli stessi file Quarto genera un sito web, un PDF, delle slide o un ebook.
+I contenuti restano file di testo: si versionano con Git, si correggono a mano, non dipendono da
+nessun programma per essere riaperti fra dieci anni.
+
+La sua particolarità è che nei documenti si può includere codice **eseguibile** in R, Python o
+Julia: tabelle e grafici vengono ricalcolati a ogni pubblicazione, a partire dai dati. Per questo
+è diffuso dove i documenti nascono dai dati — rapporti periodici, analisi, documentazione
+tecnica — e si vuole che non invecchino appena cambia il dato di partenza.
+
+Quello che Quarto non ha è un aspetto conforme alle regole italiane: arriva con Bootstrap e
+venticinque temi grafici, nessuno dei quali segue il design system della Pubblica
+Amministrazione.
+
+## Cosa aggiunge questa estensione
+
+Sostituisce il tema predefinito con [Bootstrap Italia](https://italia.github.io/bootstrap-italia/)
+2.18.3, il framework del design system `.italia` conforme alle
 [Linee guida di design per i siti internet e i servizi digitali della PA](https://designers.italia.it/norme-e-riferimenti/)
 (art. 53 del CAD).
 
