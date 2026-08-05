@@ -1,20 +1,70 @@
 ---
-title: "Hello world"
-subtitle: "Un sito Quarto con il design system .italia"
+title: "Bootstrap Italia per Quarto"
+subtitle: "Il design system .italia per i siti e i documenti generati con Quarto"
 ---
 
-Questa pagina è generata da Quarto **{{< meta quarto-version >}}** con il formato
-`bootstrap-italia-html`, che sostituisce il tema Bootstrap di Quarto con
-[Bootstrap Italia](https://italia.github.io/bootstrap-italia/) 2.18.3.
+::: {.callout-note title="Questo sito è l'esempio del tema"}
+Intestazione, menu e piè di pagina sono quelli di un ente fittizio: servono a mostrare come si
+comporta il tema in un sito istituzionale. Il progetto è
+[quarto-bootstrap-italia](https://github.com/aborruso/quarto-bootstrap-italia).
+:::
 
-Il testo scritto in Markdown eredita la tipografia del design system: font Titillium Web,
-scala tipografica, colori e spaziature previsti dalle
-[Linee guida di design per i siti internet e i servizi digitali della PA](https://designers.italia.it/norme-e-riferimenti/).
+## Cos'è
 
-## Componenti Bootstrap Italia
+Una **estensione di Quarto** che sostituisce il tema Bootstrap predefinito con
+[Bootstrap Italia](https://italia.github.io/bootstrap-italia/) 2.18.3, il framework del design
+system `.italia` conforme alle
+[Linee guida di design per i siti internet e i servizi digitali della PA](https://designers.italia.it/norme-e-riferimenti/)
+(art. 53 del CAD).
 
-Nel Markdown si possono usare direttamente le classi del design system.
-Le icone si richiamano con `<use href="#it-nome-icona">`: lo sprite è già nella pagina.
+Serve a chi scrive in Markdown — un sito istituzionale, una documentazione tecnica, un rapporto,
+un'analisi di dati — e deve pubblicare con l'aspetto previsto per la Pubblica Amministrazione,
+senza costruirsi un tema da zero.
+
+## Come si usa
+
+Si installa come qualunque estensione di Quarto, e porta con sé CSS, font, icone e JavaScript del
+design system: non serve scaricare altro e funziona senza rete.
+
+```bash
+quarto add aborruso/quarto-bootstrap-italia
+```
+
+Poi basta dichiarare il formato:
+
+```yaml
+format:
+  bootstrap-italia-html: default
+```
+
+Per partire da un sito già impostato, come questo:
+
+```bash
+quarto use template aborruso/quarto-bootstrap-italia
+```
+
+## Si continua a scrivere Quarto
+
+La sintassi standard produce i componenti del design system: non serve scrivere HTML. Questo
+Markdown
+
+``` markdown
+::: {.callout-warning title="Attenzione"}
+Testo del callout.
+:::
+```
+
+diventa il callout di Bootstrap Italia, con la variante e l'icona giuste:
+
+::: {.callout-warning title="Attenzione"}
+Testo del callout.
+:::
+
+Vale anche per tabelle, figure con didascalia, schede, elenchi di articoli, blocchi di codice,
+indice della pagina e formule. La pagina [Contenuti Quarto](/demo.html) li raccoglie tutti in un
+unico posto: è il banco di prova del tema.
+
+## Cosa porta con sé
 
 ::: {.row}
 
@@ -22,32 +72,61 @@ Le icone si richiamano con `<use href="#it-nome-icona">`: lo sprite è già nell
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Card</h3>
-<p class="card-text">Un componente `card` di Bootstrap Italia scritto con i div fenced di Quarto.</p>
-<a class="read-more" href="#"><span class="text">Leggi di più</span></a>
+<h3 class="card-title h5">Design system completo</h3>
+<p class="card-text">CSS ufficiale di Bootstrap Italia, font Titillium Web, Lora e Roboto Mono,
+sprite delle 179 icone, JavaScript dei componenti. Tutto locale, nessun servizio esterno.</p>
 :::
 :::
 :::
 :::
 
 ::: {.col-12 .col-md-6}
-::: {.callout-warning title="Callout"}
-Il callout si scrive con la sintassi standard di Quarto, `::: {.callout-warning}`:
-un filtro del tema lo riscrive con il markup di Bootstrap Italia.
+::: {.card-wrapper .card-space}
+::: {.card .card-bg}
+::: {.card-body}
+<h3 class="card-title h5">Ricerca full text</h3>
+<p class="card-text">L'interfaccia di ricerca di Quarto sparisce insieme al suo tema: qui ce n'è
+una che legge lo stesso indice e usa i componenti del design system.</p>
+:::
+:::
+:::
+:::
+
+::: {.col-12 .col-md-6}
+::: {.card-wrapper .card-space}
+::: {.card .card-bg}
+::: {.card-body}
+<h3 class="card-title h5">Accessibilità verificata</h3>
+<p class="card-text">Nessuna violazione WCAG 2.1 AA, controllata a ogni modifica: se il controllo
+non passa, il sito non viene pubblicato.</p>
+:::
+:::
+:::
+:::
+
+::: {.col-12 .col-md-6}
+::: {.card-wrapper .card-space}
+::: {.card .card-bg}
+::: {.card-body}
+<h3 class="card-title h5">Icone senza percorsi</h3>
+<p class="card-text">Lo sprite è già nella pagina: un'icona si richiama con
+<code>&lt;use href="#it-search"&gt;</code> e funziona da qualunque sottocartella.</p>
+:::
+:::
 :::
 :::
 
 :::
 
-## Codice
+## Come è fatto
 
-Anche i blocchi di codice restano funzionanti, con l'evidenziazione di Pandoc:
-
-```python
-print("hello world")
-```
+Il Bootstrap di Quarto viene rimosso del tutto (`theme: none`) e sostituito da quello del design
+system. Il resto lo fanno due filtri Lua e un foglio di stile di raccordo: i callout riscritti con
+il markup di Bootstrap Italia, lo sprite delle icone inserito nella pagina, il JavaScript
+dichiarato come dipendenza, e le parti che Quarto genera con classi proprie — indice, schede,
+elenchi, didascalie, numeri di riga — vestite come il design system.
 
 <p class="mt-4">
-  <a class="btn btn-primary" href="https://designers.italia.it/modelli/">Vai ai modelli di Designers Italia</a>
-  <a class="btn btn-outline-primary" href="https://quarto.org/docs/output-formats/html-themes.html">Theming di Quarto</a>
+  <a class="btn btn-primary" href="https://github.com/aborruso/quarto-bootstrap-italia">Vai al progetto su GitHub</a>
+  <a class="btn btn-outline-primary" href="/demo.html">Guarda i contenuti Quarto</a>
 </p>
