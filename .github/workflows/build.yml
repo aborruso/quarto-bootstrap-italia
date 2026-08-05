@@ -119,19 +119,23 @@ jobs:
       - name: Render del sito
         run: quarto render
 
+      - name: Installa gli strumenti di controllo
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+
       - name: Controllo con axe-core
         run: |
           python3 -m http.server 8080 --directory _site &
           sleep 3
-          npx -y @axe-core/cli \
-            --tags wcag2a,wcag2aa,wcag21a,wcag21aa \
-            --exit \
+          node scripts/a11y.mjs \
             http://localhost:8080/index.html \
             http://localhost:8080/demo.html \
             http://localhost:8080/servizi.html \
             http://localhost:8080/amministrazione.html \
             http://localhost:8080/eventi.html \
-            http://localhost:8080/notizie/index.html
+            http://localhost:8080/notizie/index.html \
+            http://localhost:8080/notizie/2026-03-12-biblioteca.html
 
   pubblica:
     name: Pubblica su GitHub Pages
