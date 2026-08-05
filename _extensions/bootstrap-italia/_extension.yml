@@ -1,0 +1,29 @@
+title: Bootstrap Italia
+author: Andrea Borruso
+version: 0.1.0
+quarto-required: ">=1.10.0"
+contributes:
+  formats:
+    html:
+      # il Bootstrap incluso da Quarto viene rimosso: lo stile arriva tutto da Bootstrap Italia
+      theme: none
+      toc: false
+      # senza il tema di Quarto le formule non verrebbero convertite; MathML è
+      # nativo nei browser e non richiede librerie esterne
+      html-math-method: mathml
+      anchor-sections: false
+      css:
+        - bootstrap-italia/css/bootstrap-italia.min.css
+        - fonts.css
+        - quarto-bootstrap-italia.css
+      # senza il tema di Quarto il title block esce senza la classe che Quarto si
+      # aspetta, e il post-processor ne crea un secondo dentro <main>
+      template-partials:
+        - partials/title-block.html
+      filters:
+        # i callout di Quarto resi con il markup di Bootstrap Italia, prima che
+        # Quarto li degradi a blockquote (senza il suo tema non li sa disegnare)
+        - at: pre-ast
+          path: bootstrap-italia-callout.lua
+        # JavaScript del design system, sprite delle icone, ricerca
+        - bootstrap-italia.lua

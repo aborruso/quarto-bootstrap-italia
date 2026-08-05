@@ -1,0 +1,23 @@
+project:
+  type: website
+  output-dir: _site
+  # serve solo in questo repo, dove Quarto è installato in ./quarto: senza l'esclusione
+  # il render prova a processare i .qmd dei template interni di Quarto e fallisce.
+  # In un progetto normale questa riga si può togliere.
+  render:
+    - "*.qmd"
+    - "notizie/**"
+    - "!quarto/**"
+
+website:
+  title: "Hello world Bootstrap Italia"
+  search: true
+  # nessuna navbar/sidebar di Quarto: header e footer sono quelli di Bootstrap Italia,
+  # iniettati con include-before-body / include-after-body
+
+lang: it
+
+format:
+  bootstrap-italia-html:
+    include-before-body: partials/header.html
+    include-after-body: partials/footer.html

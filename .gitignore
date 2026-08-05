@@ -1,0 +1,10 @@
+_site/
+_a11y/
+.quarto/
+# installazione locale di Quarto (447 MB)
+quarto/
+
+/.quarto/
+**/*.quarto_ipynb
+# cartelle di supporto dei render singoli
+*_files/

@@ -1,0 +1,53 @@
+---
+title: "Hello world"
+subtitle: "Un sito Quarto con il design system .italia"
+---
+
+Questa pagina è generata da Quarto **{{< meta quarto-version >}}** con il formato
+`bootstrap-italia-html`, che sostituisce il tema Bootstrap di Quarto con
+[Bootstrap Italia](https://italia.github.io/bootstrap-italia/) 2.18.3.
+
+Il testo scritto in Markdown eredita la tipografia del design system: font Titillium Web,
+scala tipografica, colori e spaziature previsti dalle
+[Linee guida di design per i siti internet e i servizi digitali della PA](https://designers.italia.it/norme-e-riferimenti/).
+
+## Componenti Bootstrap Italia
+
+Nel Markdown si possono usare direttamente le classi del design system.
+Le icone si richiamano con `<use href="#it-nome-icona">`: lo sprite è già nella pagina.
+
+::: {.row}
+
+::: {.col-12 .col-md-6}
+::: {.card-wrapper .card-space}
+::: {.card .card-bg}
+::: {.card-body}
+<h3 class="card-title h5">Card</h3>
+<p class="card-text">Un componente `card` di Bootstrap Italia scritto con i div fenced di Quarto.</p>
+<a class="read-more" href="#"><span class="text">Leggi di più</span></a>
+:::
+:::
+:::
+:::
+
+::: {.col-12 .col-md-6}
+::: {.callout-warning title="Callout"}
+Il callout si scrive con la sintassi standard di Quarto, `::: {.callout-warning}`:
+un filtro del tema lo riscrive con il markup di Bootstrap Italia.
+:::
+:::
+
+:::
+
+## Codice
+
+Anche i blocchi di codice restano funzionanti, con l'evidenziazione di Pandoc:
+
+```python
+print("hello world")
+```
+
+<p class="mt-4">
+  <a class="btn btn-primary" href="https://designers.italia.it/modelli/">Vai ai modelli di Designers Italia</a>
+  <a class="btn btn-outline-primary" href="https://quarto.org/docs/output-formats/html-themes.html">Theming di Quarto</a>
+</p>

@@ -1,0 +1,11 @@
+---
+title: "Riapertura della biblioteca comunale"
+date: 2026-03-12
+description: "Quisque at ipsum vitae velit tempor iaculis. Integer eget nibh nec nulla vestibulum euismod."
+---
+
+Quisque at ipsum vitae velit tempor iaculis. Integer eget nibh nec nulla vestibulum euismod. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+
+::: {.callout-note title="Orari"}
+Da lunedì a venerdì, dalle 9 alle 19.
+:::

@@ -1,0 +1,6 @@
+quarto/
+tasks/
+docs/
+_site/
+_a11y/
+.quarto/

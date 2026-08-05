@@ -1,0 +1,290 @@
+/* Raccordo tra il markup generato da Quarto e Bootstrap Italia.
+   Copre i contenuti che Quarto produce con classi proprie, e che senza il suo
+   tema Bootstrap resterebbero senza stile. */
+
+/* --- blocco titolo ------------------------------------------------------- */
+
+header#title-block-header {
+  padding-bottom: 1rem;
+}
+
+header#title-block-header .title {
+  margin-bottom: 0.5rem;
+}
+
+header#title-block-header .subtitle {
+  color: #5b6f82;
+  font-size: 1.25rem;
+}
+
+/* --- indice della pagina (toc: true) ------------------------------------- */
+
+nav#TOC {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--bs-primary, #0066cc);
+  background-color: #f5f6f7;
+}
+
+nav#TOC #toc-title {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+
+nav#TOC ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+nav#TOC ul ul {
+  padding-left: 1.25rem;
+}
+
+nav#TOC li {
+  margin: 0.25rem 0;
+}
+
+/* --- tabelle ------------------------------------------------------------- */
+
+/* Quarto emette tabelle senza la classe .table di Bootstrap: gliela aggiunge il
+   filtro del tema, qui restano solo didascalia e contenitore */
+
+main table > caption,
+main .table > caption {
+  padding: 0.5rem 0;
+  text-align: left;
+  color: #5b6f82;
+  font-size: 0.875rem;
+}
+
+/* didascalie di figure e tabelle con riferimento incrociato (@fig- e @tbl-) */
+main .quarto-float-caption {
+  color: #5b6f82;
+  font-size: 0.875rem;
+  padding: 0.5rem 0;
+}
+
+main figure.quarto-float-tbl > .quarto-float-caption-top {
+  text-align: left;
+}
+
+main .table-responsive {
+  margin-bottom: 1.5rem;
+}
+
+/* --- blocchi di codice --------------------------------------------------- */
+
+main div.sourceCode,
+main pre:not(.sourceCode) {
+  background-color: #f5f6f7;
+  border: 1px solid #d9dadb;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+
+main div.sourceCode pre,
+main pre.sourceCode {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+main code:not(.sourceCode) {
+  padding: 0.1em 0.3em;
+  background-color: #f5f6f7;
+  border-radius: 3px;
+}
+
+/* pulsante "copia" dei blocchi di codice */
+main .code-copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border: 0;
+  background: transparent;
+  opacity: 0.5;
+}
+
+main .code-copy-button:hover {
+  opacity: 1;
+}
+
+main div.sourceCode {
+  position: relative;
+}
+
+/* --- schede (panel-tabset) ----------------------------------------------- */
+
+main .panel-tabset {
+  margin-bottom: 2rem;
+}
+
+main ul.panel-tabset-tabby {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid #d9dadb;
+}
+
+main ul.panel-tabset-tabby > li > a {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  color: var(--bs-primary, #0066cc);
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+}
+
+main ul.panel-tabset-tabby > li > a:hover {
+  background-color: #f5f6f7;
+}
+
+main ul.panel-tabset-tabby > li > a[aria-selected='true'] {
+  color: #17324d;
+  border-bottom-color: var(--bs-primary, #0066cc);
+}
+
+main .panel-tabset .tab-content {
+  padding-top: 1.5rem;
+}
+
+/* --- figure -------------------------------------------------------------- */
+
+main figure {
+  margin-bottom: 2rem;
+}
+
+main figure figcaption,
+main .figure-caption {
+  padding-top: 0.5rem;
+  color: #5b6f82;
+  font-size: 0.875rem;
+}
+
+/* --- note a piè di pagina ------------------------------------------------ */
+
+main section.footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #d9dadb;
+  font-size: 0.875rem;
+}
+
+/* --- citazioni ----------------------------------------------------------- */
+
+main blockquote {
+  padding-left: 1.5rem;
+  border-left: 4px solid #d9dadb;
+  color: #5b6f82;
+}
+
+/* --- listing (pagine di elenco: notizie, articoli, documenti) ------------- */
+
+main .quarto-listing {
+  margin-top: 2rem;
+}
+
+main .quarto-post {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #d9dadb;
+}
+
+main .quarto-post:last-child {
+  border-bottom: 1px solid #d9dadb;
+}
+
+main .quarto-post .body {
+  flex: 1 1 20rem;
+}
+
+main .quarto-post .metadata {
+  flex: 0 0 auto;
+  order: -1;
+  width: 100%;
+}
+
+main .quarto-post .listing-title {
+  margin-bottom: 0.5rem;
+}
+
+main .quarto-post .listing-title a,
+main .quarto-post .listing-description a,
+main .quarto-post .metadata a {
+  text-decoration: none;
+  color: inherit;
+}
+
+main .quarto-post .listing-title a {
+  color: var(--bs-primary, #0066cc);
+}
+
+main .quarto-post .listing-title a:hover,
+main .quarto-post .listing-description a:hover {
+  text-decoration: underline;
+}
+
+main .quarto-post .listing-description p {
+  margin-bottom: 0;
+}
+
+main .quarto-post .listing-date {
+  color: #5b6f82;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+main .quarto-listing .listing-actions-group {
+  margin-bottom: 1.5rem;
+}
+
+/* --- numeri di riga nel codice (```{.python .numberLines}) ---------------- */
+
+/* Pandoc inserisce nella pagina regole proprie che spostano la riga di -4em e
+   il numero ancora più a sinistra: fuori dal riquadro del codice, dove viene
+   tagliato. Qui il posizionamento viene annullato e il numero messo in testa
+   alla riga. */
+
+main pre.numberSource {
+  margin-left: 0;
+}
+
+main pre.numberSource code {
+  counter-reset: source-line 0;
+}
+
+main pre.numberSource code > span {
+  position: static;
+  left: auto;
+  counter-increment: source-line;
+}
+
+main pre.numberSource code > span > a:first-child {
+  text-decoration: none;
+}
+
+main pre.numberSource code > span > a:first-child::before {
+  content: counter(source-line);
+  position: static;
+  left: auto;
+  display: inline-block;
+  width: 2em;
+  margin-right: 1rem;
+  padding-right: 0.5rem;
+  text-align: right;
+  color: #5b6f82;
+  border-right: 1px solid #d9dadb;
+  user-select: none;
+}

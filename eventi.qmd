@@ -1,0 +1,42 @@
+---
+title: "Eventi"
+subtitle: "Appuntamenti, incontri e iniziative"
+---
+
+In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.
+
+## Prossimi appuntamenti
+
+::: {.row}
+
+::: {.col-12 .col-md-6}
+::: {.card-wrapper .card-space}
+::: {.card .card-bg}
+::: {.card-body}
+<span class="card-signature">Sabato 5 aprile, ore 10.00</span>
+<h3 class="card-title h5">Giornata del verde pulito</h3>
+<p class="card-text">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+<a class="read-more" href="#"><span class="text">Vedi l'evento</span></a>
+:::
+:::
+:::
+:::
+
+::: {.col-12 .col-md-6}
+::: {.card-wrapper .card-space}
+::: {.card .card-bg}
+::: {.card-body}
+<span class="card-signature">Mercoledì 16 aprile, ore 18.30</span>
+<h3 class="card-title h5">Consiglio comunale aperto</h3>
+<p class="card-text">Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.</p>
+<a class="read-more" href="#"><span class="text">Vedi l'evento</span></a>
+:::
+:::
+:::
+:::
+
+:::
+
+## Come partecipare
+
+Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus.

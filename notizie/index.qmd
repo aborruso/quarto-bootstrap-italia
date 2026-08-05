@@ -1,0 +1,13 @@
+---
+title: "Notizie"
+subtitle: "Comunicati e aggiornamenti dell'ente"
+listing:
+  contents: "2*.qmd"
+  type: default
+  sort: "date desc"
+  fields: [date, title, description]
+---
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed lorem eu justo faucibus tincidunt.
+
+## Ultime notizie

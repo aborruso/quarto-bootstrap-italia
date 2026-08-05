@@ -1,0 +1,146 @@
+name: Verifica e pubblica
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Render e controlli
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installa Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.18
+
+      - name: Render del sito
+        run: quarto render
+
+      - name: Controlli di regressione sull'output
+        run: |
+          set -e
+          fallito=0
+          verifica() {
+            if grep -q "$2" "$1"; then
+              echo "ok      $3"
+            else
+              echo "FALLITO $3  (atteso in $1)"
+              fallito=1
+            fi
+          }
+
+          # gli asset del design system devono essere collegati e copiati
+          verifica _site/index.html 'bootstrap-italia.min.css' 'CSS di Bootstrap Italia collegato'
+          verifica _site/index.html 'bootstrap-italia.bundle.min.js' 'JavaScript del design system collegato'
+          verifica _site/index.html '<symbol id="it-pa"' 'sprite delle icone inserito nella pagina'
+          test -f _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/fonts.css \
+            && echo "ok      fonts.css copiato" \
+            || { echo "FALLITO fonts.css non copiato"; fallito=1; }
+          test -d _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/bootstrap-italia/fonts/Titillium_Web \
+            && echo "ok      font Titillium Web copiati" \
+            || { echo "FALLITO font non copiati"; fallito=1; }
+
+          # il Bootstrap di Quarto deve restare fuori
+          if [ -d _site/site_libs/bootstrap ]; then
+            echo "FALLITO il Bootstrap di Quarto è finito nell'output"
+            fallito=1
+          else
+            echo "ok      nessun Bootstrap di Quarto nell'output"
+          fi
+
+          # i contenuti Quarto devono uscire con il markup del design system
+          verifica _site/demo.html 'class="callout warning"' 'callout riscritto con il markup di Bootstrap Italia'
+          verifica _site/demo.html '<table class="table' 'classe .table sulle tabelle'
+          verifica _site/demo.html 'numberSource' 'numeri di riga nel codice'
+          verifica _site/notizie/index.html 'quarto-listing' 'listing generato'
+
+          # il listing deve stare dentro <main>, non appeso al body
+          python3 - <<'EOF'
+          import sys
+          s = open('_site/notizie/index.html').read()
+          apre, chiude, listing = s.find('<main'), s.find('</main>'), s.find('class="quarto-listing')
+          if apre < listing < chiude:
+              print('ok      listing dentro <main>')
+          else:
+              print('FALLITO listing fuori da <main>')
+              sys.exit(1)
+          EOF
+
+          # la ricerca deve avere il suo indice
+          test -f _site/search.json && echo "ok      indice di ricerca generato" \
+            || { echo "FALLITO search.json mancante"; fallito=1; }
+
+          # nessun id ripetuto nella pagina (lo sprite è escluso: i suoi symbol hanno id propri)
+          python3 - <<'EOF'
+          import re, collections, pathlib, sys
+          errori = 0
+          for f in sorted(pathlib.Path('_site').rglob('*.html')):
+              s = re.sub(r'<svg aria-hidden="true" focusable="false".*?</svg>', '', f.read_text(), flags=re.S)
+              dup = [i for i, n in collections.Counter(re.findall(r'\sid="([^"]+)"', s)).items() if n > 1]
+              if dup:
+                  print(f'FALLITO id ripetuti in {f}: {dup}')
+                  errori = 1
+          print('ok      nessun id ripetuto' if not errori else '')
+          sys.exit(errori)
+          EOF
+
+          exit $fallito
+
+      - name: Carica il sito per la pubblicazione
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  accessibilita:
+    name: Accessibilità (WCAG 2.1 AA)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installa Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.18
+
+      - name: Render del sito
+        run: quarto render
+
+      - name: Controllo con axe-core
+        run: |
+          python3 -m http.server 8080 --directory _site &
+          sleep 3
+          npx -y @axe-core/cli \
+            --tags wcag2a,wcag2aa,wcag21a,wcag21aa \
+            --exit \
+            http://localhost:8080/index.html \
+            http://localhost:8080/demo.html \
+            http://localhost:8080/servizi.html \
+            http://localhost:8080/amministrazione.html \
+            http://localhost:8080/eventi.html \
+            http://localhost:8080/notizie/index.html
+
+  pubblica:
+    name: Pubblica su GitHub Pages
+    if: github.ref == 'refs/heads/main'
+    needs: [build, accessibilita]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

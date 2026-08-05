@@ -1,0 +1,9 @@
+# Profilo per il controllo di accessibilità: quarto render --profile a11y
+# Attiva il report axe di Quarto (axe-core incluso, funziona offline).
+# Scrive in _a11y per non interferire con _site e con quarto preview.
+project:
+  output-dir: _a11y
+
+axe:
+  output: json
+  standard: wcag21aa
