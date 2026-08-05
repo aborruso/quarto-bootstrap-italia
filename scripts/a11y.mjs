@@ -12,10 +12,12 @@ if (pagine.length === 0) {
 }
 
 const browser = await chromium.launch()
+// axe-core/playwright richiede una pagina creata da un contesto, non da browser.newPage()
+const contesto = await browser.newContext()
 let violazioni = 0
 
 for (const url of pagine) {
-  const pagina = await browser.newPage()
+  const pagina = await contesto.newPage()
   await pagina.goto(url, { waitUntil: 'networkidle' })
 
   const esito = await new AxeBuilder({ page: pagina })
