@@ -135,6 +135,7 @@ Principio: chi scrive usa Quarto come ogni giorno, il tema fa il resto. Nessuna 
 
 - [ ] [#1](https://github.com/aborruso/quarto-bootstrap-italia/issues/1) Verificare `quarto add` e `quarto use template` **dal remoto**: il percorso di installazione non è mai stato eseguito per intero
 - [ ] [#2](https://github.com/aborruso/quarto-bootstrap-italia/issues/2) Verificare l'output di codice eseguito (knitr e Jupyter): tabelle `df-print`, grafici, output delle celle
+- [ ] [#3](https://github.com/aborruso/quarto-bootstrap-italia/issues/3) I riferimenti incrociati ai callout non si risolvono (`@tip-uno` → `?@tip-uno`): il filtro riscrive il callout in HTML grezzo a `pre-ast`, prima che i crossref di Quarto lo vedano
 
 ### Altro da fare
 

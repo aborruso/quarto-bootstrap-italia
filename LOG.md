@@ -7,6 +7,7 @@
 - Callout: il filtro consumava solo `title` e ignorava in silenzio gli altri tre attributi che Quarto documenta. Ora `collapse` produce il callout richiudibile nativo del design system (`collapse-div` + `callout-more-toggle`, con il collapse di Bootstrap già caricato), `icon=false` toglie l'icona, `appearance="simple"|"minimal"` usa `callout-highlight` — con il bordo di `callout-inner` annullato, altrimenti restava un riquadro dentro la barra laterale
 - Colmati i vuoti di stile che restavano dal `theme: none`: il pulsante "copia" era senza icona (il font bootstrap-icons di Quarto non c'è più) e ora usa le icone del design system in maschera; stile per il nome file (`filename=`) e per le annotazioni di codice, spostando il pulsante di copia dove non le copre
 - `demo.qmd` copre i casi nuovi: fold, `filename=`, annotazioni, callout richiudibile, senza riquadro e senza icona. Controllo axe WCAG 2.1 AA sulla demo: nessuna violazione
+- Trovato invece un caso che resta rotto e non è un ritocco: i riferimenti incrociati ai callout (`@tip-uno` → `?@tip-uno`), perché il filtro riscrive il callout in HTML grezzo prima che i crossref di Quarto lo vedano. Tracciato come issue [#3](https://github.com/aborruso/quarto-bootstrap-italia/issues/3)
 
 ## 2026-08-05
 
