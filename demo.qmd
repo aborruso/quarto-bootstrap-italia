@@ -107,6 +107,22 @@ df = pd.read_csv("comuni.csv")
 df.groupby("provincia").size()
 ```
 
+Codice con il nome del file:
+
+```{.python filename="analisi.py"}
+comuni = leggi("comuni.csv")
+```
+
+Codice con annotazioni:
+
+```python
+import pandas as pd            # <1>
+df = pd.read_csv("comuni.csv") # <2>
+```
+
+1. Si importa la libreria.
+2. Si legge il file dei comuni.
+
 ## Schede
 
 ::: {.panel-tabset}
@@ -158,6 +174,18 @@ Callout di tipo `caution`.
 
 ::: {.callout-important title="Importante"}
 Callout di tipo `important`.
+:::
+
+::: {.callout-note collapse="true" title="Callout richiudibile"}
+Il contenuto compare quando si apre: è il callout richiudibile del design system.
+:::
+
+::: {.callout-tip appearance="simple" title="Senza riquadro"}
+Callout con `appearance="simple"`: solo la barra laterale, senza riquadro.
+:::
+
+::: {.callout-warning icon=false title="Senza icona"}
+Callout con `icon=false`.
 :::
 
 ## Formule

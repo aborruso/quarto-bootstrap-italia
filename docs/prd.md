@@ -50,6 +50,8 @@ Da lì in poi si scrive Quarto normale. La sintassi standard deve produrre compo
 | Si scrive | Si ottiene |
 | --- | --- |
 | `::: {.callout-warning}` | il callout di Bootstrap Italia, con icona e variante corrette |
+| `collapse="true"` su un callout | il callout richiudibile del design system |
+| `appearance="simple"`, `icon=false` | le varianti senza riquadro e senza icona |
 | una tabella Markdown | la tabella del design system |
 | `![didascalia](img.png)` | la figura con la didascalia del design system |
 | `::: {.panel-tabset}` | le schede del design system |
@@ -86,6 +88,8 @@ Il profilo comune: sa scrivere Markdown, non necessariamente SCSS o JavaScript. 
 | Ricerca full text | `bootstrap-italia-search.js` sull'indice `search.json` di Quarto |
 | Callout di Quarto → callout del design system | filtro Lua `at: pre-ast` |
 | `code-fold` sui blocchi di codice scritti a mano | filtro Lua `at: pre-ast` |
+| `collapse`, `appearance`, `icon` dei callout | filtro Lua `at: pre-ast` |
+| Icona del pulsante "copia", nome file, annotazioni di codice | `quarto-bootstrap-italia.css` |
 | Classe `.table` sulle tabelle | filtro Lua |
 | Raccordo per indice, codice, schede, didascalie | `quarto-bootstrap-italia.css` |
 | Formule in MathML, senza librerie esterne | `html-math-method: mathml` |

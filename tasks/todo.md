@@ -111,6 +111,16 @@ Verifiche fatte:
 - [x] Blocco di codice con numeri di riga aggiunto alla demo: nessuna violazione, il fix #14655 vale anche qui
 - Il fix ORCID (#14602) riguarda il title block di Quarto: il tema usa un partial proprio, che non mostra gli ORCID né prima né dopo — non è una regressione, ma è un dato da tenere presente se servirà
 
+## Fase 10 — Sintassi di Quarto resa con Bootstrap Italia
+
+Principio: chi scrive usa Quarto come ogni giorno, il tema fa il resto. Nessuna classe interna di Quarto nei sorgenti, nessun attributo documentato ignorato in silenzio.
+
+- [x] `code-fold`/`code-summary` sui blocchi scritti a mano: Quarto piega solo i blocchi con classe `cell-code` (le celle eseguibili). Il filtro `bootstrap-italia-code.lua` (`at: pre-ast`) la aggiunge
+- [x] Verificato che `code-fold: true` nel front matter non è raggiungibile dai filtri delle estensioni (non arriva né in `meta` né in `param`, a nessuna fase): il fold si chiede blocco per blocco
+- [x] Callout: `collapse` → richiudibile nativo del design system, `icon=false`, `appearance="simple"|"minimal"` → `callout-highlight` con il bordo di `callout-inner` annullato
+- [x] Vuoti di stile del `theme: none`: icona del pulsante "copia" (dal font bootstrap-icons di Quarto, assente) rifatta con le icone del design system in maschera; `filename=` e annotazioni di codice
+- [x] `demo.qmd` copre i casi nuovi; axe WCAG 2.1 AA sulla demo: nessuna violazione
+
 ## Cosa resta da fare
 
 ### Fatto

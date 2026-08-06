@@ -55,6 +55,16 @@ local function estrai_titolo(div, predefinito)
   return predefinito, blocchi
 end
 
+-- gli attributi che Quarto documenta per i callout, oltre a title:
+--   collapse="true|false"  richiudibile (chiuso o già aperto)
+--   icon="false"           senza icona
+--   appearance="simple|minimal"  versione senza riquadro; minimal è anche senza icona
+local function falso(v)
+  return v == 'false' or v == '0'
+end
+
+local progressivo = 0
+
 function Div(div)
   if not quarto.doc.is_format('html:js') then
     return nil
@@ -67,6 +77,10 @@ function Div(div)
 
   local titolo, contenuto = estrai_titolo(div, def.titolo)
 
+  local aspetto = div.attributes['appearance']
+  local collapse = div.attributes['collapse']
+  local con_icona = not falso(div.attributes['icon']) and aspetto ~= 'minimal'
+
   -- le classi diverse da callout-* restano sull'elemento esterno
   local extra = pandoc.List()
   for _, c in ipairs(div.classes) do
@@ -77,21 +91,50 @@ function Div(div)
 
   local id = div.identifier ~= '' and (' id="' .. div.identifier .. '"') or ''
   local classi = 'callout ' .. def.variante
+  -- il callout senza riquadro del design system è .callout-highlight
+  if aspetto == 'simple' or aspetto == 'minimal' then
+    classi = classi .. ' callout-highlight'
+  end
   if #extra > 0 then
     classi = classi .. ' ' .. table.concat(extra, ' ')
   end
 
-  local apertura = table.concat({
+  local icona = con_icona
+    and ('<svg class="icon" aria-hidden="true"><use href="#' .. def.icona .. '"></use></svg>')
+    or ''
+
+  local apertura = pandoc.List({
     '<div class="' .. classi .. '"' .. id .. '>',
     '<div class="callout-inner">',
     '<div class="callout-title">',
-    '<svg class="icon" aria-hidden="true"><use href="#' .. def.icona .. '"></use></svg>',
+    icona,
     '<span class="text">' .. titolo .. '</span>',
     '</div>',
-  }, '\n')
+  })
+  local chiusura = pandoc.List({ '</div>', '</div>' })
 
-  local risultato = pandoc.List({ pandoc.RawBlock('html', apertura) })
+  -- richiudibile: il collapse di Bootstrap Italia, con il pulsante del design system
+  if collapse ~= nil then
+    progressivo = progressivo + 1
+    local base = (div.identifier ~= '' and div.identifier or 'callout') .. '-' .. progressivo
+    local corpo, intestazione = base .. '-corpo', base .. '-toggle'
+    local aperto = falso(collapse)
+    apertura:extend({
+      '<div class="collapse-div">',
+      '<div class="collapse-header" id="' .. intestazione .. '">',
+      '<button class="callout-more-toggle" type="button" data-bs-toggle="collapse"'
+        .. ' data-bs-target="#' .. corpo .. '" aria-expanded="' .. tostring(aperto) .. '"'
+        .. ' aria-controls="' .. corpo .. '">Leggi di più<span aria-hidden="true"></span></button>',
+      '</div>',
+      '<div id="' .. corpo .. '" class="collapse' .. (aperto and ' show' or '') .. '"'
+        .. ' role="region" aria-labelledby="' .. intestazione .. '">',
+      '<div class="collapse-body">',
+    })
+    chiusura = pandoc.List({ '</div>', '</div>', '</div>', '</div>', '</div>' })
+  end
+
+  local risultato = pandoc.List({ pandoc.RawBlock('html', table.concat(apertura, '\n')) })
   risultato:extend(contenuto)
-  risultato:insert(pandoc.RawBlock('html', '</div>\n</div>'))
+  risultato:insert(pandoc.RawBlock('html', table.concat(chiusura, '\n')))
   return risultato
 end

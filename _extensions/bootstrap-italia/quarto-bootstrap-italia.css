@@ -116,8 +116,112 @@ main .code-copy-button:hover {
   opacity: 1;
 }
 
+/* l'icona del pulsante arriva dal font bootstrap-icons di Quarto, che con
+   `theme: none` non c'è: al suo posto le icone del design system, in maschera
+   così da prendere il colore del testo */
+main .code-copy-button > .bi::before {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask: var(--bi-icona-copia) no-repeat center / contain;
+  mask: var(--bi-icona-copia) no-repeat center / contain;
+}
+
+main .code-copy-button-checked > .bi::before {
+  -webkit-mask-image: var(--bi-icona-fatto);
+  mask-image: var(--bi-icona-fatto);
+}
+
+main {
+  --bi-icona-copia: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.5 4H18v-.6c-.1-.8-.7-1.4-1.5-1.4h-11c-.8 0-1.4.6-1.5 1.4v15.2c.1.8.7 1.4 1.5 1.4H7v.6c.1.8.7 1.4 1.5 1.4h11c.8 0 1.4-.6 1.5-1.4V5.4c-.1-.8-.7-1.4-1.5-1.4zM5 18.6V3.4c0-.2.3-.4.5-.4h11c.2 0 .5.2.5.4v15.2c0 .2-.3.4-.5.4h-11c-.2 0-.5-.2-.5-.4zm15 2c0 .2-.3.4-.5.4h-11c-.2 0-.5-.2-.5-.4V20h8.5c.8 0 1.4-.6 1.5-1.4V5h1.5c.2 0 .5.2.5.4v15.2z"/></svg>');
+  --bi-icona-fatto: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.6 16.9 4 11.4l.8-.7 4.8 4.8 8.5-8.4.7.7-9.2 9.1z"/></svg>');
+}
+
 main div.sourceCode {
   position: relative;
+}
+
+/* nome del file sopra il blocco di codice (attributo filename=) */
+main .code-with-filename .code-with-filename-file {
+  margin-bottom: 0;
+  padding: 0.4rem 1rem;
+  background-color: #e9ecef;
+  border: 1px solid #d9dadb;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+}
+
+main .code-with-filename .code-with-filename-file pre {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: 0.85rem;
+}
+
+main .code-with-filename div.sourceCode {
+  margin-top: 0;
+  border-radius: 0 0 4px 4px;
+}
+
+/* annotazioni del codice: i numeri nel margine e l'elenco delle spiegazioni */
+main .code-annotation-anchor {
+  display: inline-block;
+  min-width: 1.4em;
+  height: 1.4em;
+  margin-right: 0.5rem;
+  border: 1px solid var(--bs-primary, #0066cc);
+  border-radius: 50%;
+  color: var(--bs-primary, #0066cc);
+  font-size: 0.75rem;
+  line-height: 1.3em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+main .code-annotation-anchor:hover {
+  background-color: var(--bs-primary, #0066cc);
+  color: #fff;
+}
+
+main dl.code-annotation-container-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem 0.75rem;
+  margin: 1rem 0 2rem;
+  font-size: 0.9rem;
+}
+
+main dl.code-annotation-container-grid > dt {
+  min-width: 1.4em;
+  height: 1.4em;
+  border: 1px solid var(--bs-primary, #0066cc);
+  border-radius: 50%;
+  color: var(--bs-primary, #0066cc);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.3em;
+  text-align: center;
+}
+
+main dl.code-annotation-container-grid > dd {
+  margin: 0;
+}
+
+/* callout senza riquadro (appearance="simple"|"minimal"): .callout-highlight toglie
+   il bordo esterno, ma il riquadro del callout lo disegna .callout-inner */
+main .callout.callout-highlight > .callout-inner {
+  border: 0;
+  padding: 0.5rem 0;
+}
+
+/* nei blocchi annotati i numeri stanno a destra, dove finirebbe il pulsante di copia */
+main .code-copy-outer-scaffold:has(pre.code-annotated) .code-copy-button {
+  right: 2.5rem;
 }
 
 /* codice richiudibile (code-fold): senza il tema di Quarto il <details> esce senza stile */
