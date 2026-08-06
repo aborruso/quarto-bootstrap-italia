@@ -1,5 +1,9 @@
 # Log
 
+## 2026-08-06
+
+- `code-fold` non funzionava sui blocchi di codice scritti a mano: Quarto lo applica solo ai blocchi con classe `cell-code`, cioè alle celle eseguibili. Nuovo filtro `bootstrap-italia-code.lua` (`at: pre-ast`) che aggiunge quella classe ai blocchi che chiedono il fold, così nel Markdown si scrive solo la sintassi documentata; CSS per il `<summary>`, che senza il tema di Quarto usciva senza stile
+
 ## 2026-08-05
 
 - Primo impianto del formato Quarto `bootstrap-italia-html`: `theme: none` e Bootstrap Italia 2.18.3 al posto del Bootstrap di Quarto

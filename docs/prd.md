@@ -55,8 +55,11 @@ Da lì in poi si scrive Quarto normale. La sintassi standard deve produrre compo
 | `::: {.panel-tabset}` | le schede del design system |
 | `toc: true` | l'indice della pagina, nello stile del design system |
 | un blocco di codice | il blocco di codice del design system |
+| `code-fold="true"` su un blocco di codice | il blocco richiudibile, con il riepilogo cliccabile |
 
 Chi vuole spingersi oltre usa direttamente le classi di Bootstrap Italia nei div fenced di Quarto (`::: {.card-wrapper}`) o in HTML: è un'aggiunta, non un obbligo.
+
+**Corollario: niente classi interne di Quarto nei sorgenti.** Se una funzione documentata di Quarto funziona solo aggiungendo a mano una classe che Quarto usa internamente — per esempio `.cell-code`, che il fold del codice pretende perché nasce per le celle eseguibili — il difetto è del tema, non di chi scrive: va risolto in un filtro Lua, non nel Markdown. Lo stesso vale per gli attributi che Quarto documenta e che il tema, riscrivendo il markup, rischia di perdere per strada: se un attributo viene ignorato in silenzio, l'utente non ha modo di accorgersene.
 
 Il documento resta portabile: se lo si rende con `format: html`, esce un normale documento Quarto. Nessun contenuto viene scritto in un dialetto che funziona solo con questo tema.
 
@@ -82,6 +85,7 @@ Il profilo comune: sa scrivere Markdown, non necessariamente SCSS o JavaScript. 
 | Sprite delle 179 icone | inserito nel body dal filtro Lua |
 | Ricerca full text | `bootstrap-italia-search.js` sull'indice `search.json` di Quarto |
 | Callout di Quarto → callout del design system | filtro Lua `at: pre-ast` |
+| `code-fold` sui blocchi di codice scritti a mano | filtro Lua `at: pre-ast` |
 | Classe `.table` sulle tabelle | filtro Lua |
 | Raccordo per indice, codice, schede, didascalie | `quarto-bootstrap-italia.css` |
 | Formule in MathML, senza librerie esterne | `html-math-method: mathml` |

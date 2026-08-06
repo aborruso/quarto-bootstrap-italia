@@ -120,6 +120,18 @@ main div.sourceCode {
   position: relative;
 }
 
+/* codice richiudibile (code-fold): senza il tema di Quarto il <details> esce senza stile */
+main details.code-fold > summary {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  color: #06c;
+  font-size: 0.9rem;
+}
+
+main details.code-fold > summary:hover {
+  text-decoration: underline;
+}
+
 /* --- schede (panel-tabset) ----------------------------------------------- */
 
 main .panel-tabset {

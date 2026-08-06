@@ -27,5 +27,8 @@ contributes:
         # Quarto li degradi a blockquote (senza il suo tema non li sa disegnare)
         - at: pre-ast
           path: bootstrap-italia-callout.lua
+        # code-fold anche sui blocchi di codice scritti a mano, non solo sulle celle
+        - at: pre-ast
+          path: bootstrap-italia-code.lua
         # JavaScript del design system, sprite delle icone, ricerca
         - bootstrap-italia.lua
