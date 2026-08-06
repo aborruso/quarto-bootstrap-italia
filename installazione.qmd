@@ -92,11 +92,13 @@ pagina. Le pagine di esempio (`demo.qmd`, la cartella `img/`) si possono cancell
 
 ## Le icone
 
-Lo sprite delle 179 icone del design system è già dentro ogni pagina, quindi un'icona si richiama
-con un riferimento interno, senza percorsi:
+Lo sprite delle 179 icone del design system è già dentro ogni pagina, e si richiama con uno
+shortcode, senza scrivere SVG:
 
-``` html
-<svg class="icon"><use href="#it-search"></use></svg>
+``` markdown
+{{< icona it-search >}}                   icona decorativa
+{{< icona it-file primary >}}             con il colore primario
+{{< icona it-user alt="Utente" >}}        icona che porta significato: viene letta dagli screen reader
 ```
 
 I nomi sono quelli della
@@ -135,6 +137,8 @@ Si scrive Quarto normale: la sintassi standard produce i componenti del design s
 | `listing:` | elenco di articoli con data, titolo e descrizione |
 | `toc: true` | l'indice della pagina |
 | blocchi di codice, `.numberLines`, `code-fold` | riquadri con numeri di riga e pulsante di copia |
+| `collapse="true"`, `appearance`, `icon=false` sui callout | le varianti richiudibile, senza riquadro, senza icona |
+| `{{< icona it-file >}}` | l'icona del design system, senza percorsi né SVG |
 | `$…$` e `$$…$$` | formule in MathML, senza librerie esterne |
 
 : Contenuti Quarto e resa nel design system {tbl-colwidths="[45,55]"}
@@ -145,12 +149,19 @@ Le classi di Bootstrap Italia si usano direttamente nei div fenced, quando serve
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Titolo</h3>
-<p class="card-text">Testo della card.</p>
+### Titolo
+
+Testo della card.
+
+[Leggi di più](#){.read-more}
 :::
 :::
 :::
 ```
+
+Dentro la card si scrive Markdown normale: il titolo diventa il titolo del design system e il
+link `read-more` la sua freccia. Vale anche per gli altri componenti — `::: {.chip .chip-simple}`,
+`[Nuovo]{.badge .bg-primary}`, `[Vai](url){.btn .btn-primary}` — senza scrivere HTML.
 
 La pagina [Contenuti Quarto](/demo.html) mostra tutti questi casi resi.
 

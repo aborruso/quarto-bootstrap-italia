@@ -120,6 +120,11 @@ Principio: chi scrive usa Quarto come ogni giorno, il tema fa il resto. Nessuna 
 - [x] Callout: `collapse` → richiudibile nativo del design system, `icon=false`, `appearance="simple"|"minimal"` → `callout-highlight` con il bordo di `callout-inner` annullato
 - [x] Vuoti di stile del `theme: none`: icona del pulsante "copia" (dal font bootstrap-icons di Quarto, assente) rifatta con le icone del design system in maschera; `filename=` e annotazioni di codice
 - [x] `demo.qmd` copre i casi nuovi; axe WCAG 2.1 AA sulla demo: nessuna violazione
+- [x] Niente più HTML grezzo nei contenuti: card, bottoni, chip, badge, avanzamento e icone scritti con la sintassi di Quarto in tutte le pagine
+  - shortcode `{{< icona nome [classe] alt="…" >}}` per le icone dello sprite
+  - il tema aggiunge da sé quello che il Markdown non esprime: classi del titolo card, `<span class="text">` di `read-more`, rimozione del `<p>` nei componenti flex
+  - il filtro principale è passato a `at: post-quarto`, dove gli shortcode sono espansi
+  - demo ampliata: chip in cinque varianti e sei badge
 
 ## Cosa resta da fare
 

@@ -7,6 +7,12 @@
 - Callout: il filtro consumava solo `title` e ignorava in silenzio gli altri tre attributi che Quarto documenta. Ora `collapse` produce il callout richiudibile nativo del design system (`collapse-div` + `callout-more-toggle`, con il collapse di Bootstrap già caricato), `icon=false` toglie l'icona, `appearance="simple"|"minimal"` usa `callout-highlight` — con il bordo di `callout-inner` annullato, altrimenti restava un riquadro dentro la barra laterale
 - Colmati i vuoti di stile che restavano dal `theme: none`: il pulsante "copia" era senza icona (il font bootstrap-icons di Quarto non c'è più) e ora usa le icone del design system in maschera; stile per il nome file (`filename=`) e per le annotazioni di codice, spostando il pulsante di copia dove non le copre
 - `demo.qmd` copre i casi nuovi: fold, `filename=`, annotazioni, callout richiudibile, senza riquadro e senza icona. Controllo axe WCAG 2.1 AA sulla demo: nessuna violazione
+- Ripulito l'HTML grezzo dai contenuti: card, bottoni, chip, badge, barra di avanzamento e icone si scrivono ora con la sintassi di Quarto in tutte le pagine. Quello che il Markdown non sa esprimere lo costruisce il tema:
+  - shortcode `{{< icona it-file primary >}}` (nuovo `bootstrap-italia-shortcodes.lua`), con `alt=` per le icone che portano significato
+  - il titolo dentro `::: {.card-body}` diventa `<h3 class="card-title h5">`; le classi non vengono aggiunte all'header perché finirebbero anche sulla `<section>` che Quarto costruisce intorno, cambiando il corpo del testo
+  - `[Leggi di più](#){.read-more}` prende da sé lo `<span class="text">` che il design system richiede
+  - nei componenti flex (chip, btn-group, card-teaser, callout-title) sparisce il paragrafo che Pandoc mette intorno al contenuto dei div fenced: era lui a spingere l'etichetta fuori dal chip
+- Il filtro `bootstrap-italia.lua` è passato a `at: post-quarto`: prima gli shortcode sono ancora segnaposto e il markup non è quello definitivo
 - Trovato invece un caso che resta rotto e non è un ritocco: i riferimenti incrociati ai callout (`@tip-uno` → `?@tip-uno`), perché il filtro riscrive il callout in HTML grezzo prima che i crossref di Quarto lo vedano. Tracciato come issue [#3](https://github.com/aborruso/quarto-bootstrap-italia/issues/3)
 
 ## 2026-08-05

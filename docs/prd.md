@@ -52,6 +52,9 @@ Da lì in poi si scrive Quarto normale. La sintassi standard deve produrre compo
 | `::: {.callout-warning}` | il callout di Bootstrap Italia, con icona e variante corrette |
 | `collapse="true"` su un callout | il callout richiudibile del design system |
 | `appearance="simple"`, `icon=false` | le varianti senza riquadro e senza icona |
+| un titolo e un paragrafo dentro `::: {.card-body}` | il titolo e il testo della card, con le classi giuste |
+| `{{< icona it-file >}}` | l'icona del design system, senza percorsi né SVG scritto a mano |
+| `[Nuovo]{.badge .bg-primary}`, `::: {.chip .chip-simple}` | badge ed etichette del design system |
 | una tabella Markdown | la tabella del design system |
 | `![didascalia](img.png)` | la figura con la didascalia del design system |
 | `::: {.panel-tabset}` | le schede del design system |
@@ -59,7 +62,9 @@ Da lì in poi si scrive Quarto normale. La sintassi standard deve produrre compo
 | un blocco di codice | il blocco di codice del design system |
 | `code-fold="true"` su un blocco di codice | il blocco richiudibile, con il riepilogo cliccabile |
 
-Chi vuole spingersi oltre usa direttamente le classi di Bootstrap Italia nei div fenced di Quarto (`::: {.card-wrapper}`) o in HTML: è un'aggiunta, non un obbligo.
+Chi vuole spingersi oltre usa direttamente le classi di Bootstrap Italia nei div fenced di Quarto (`::: {.card-wrapper}`): è un'aggiunta, non un obbligo.
+
+**Corollario: niente HTML grezzo nei contenuti.** Le classi si mettono con la sintassi di Quarto — `::: {.classe}` sui blocchi, `[testo]{.classe}` sugli inline, `[testo](url){.classe}` sui link — e dove il componente richiede markup che il Markdown non sa esprimere (l'SVG di un'icona, il testo del link `read-more`, il titolo della card) è il tema a costruirlo. Se per un componente del design system serve aprire un tag a mano, quel pezzo va aggiunto al tema, non al documento.
 
 **Corollario: niente classi interne di Quarto nei sorgenti.** Se una funzione documentata di Quarto funziona solo aggiungendo a mano una classe che Quarto usa internamente — per esempio `.cell-code`, che il fold del codice pretende perché nasce per le celle eseguibili — il difetto è del tema, non di chi scrive: va risolto in un filtro Lua, non nel Markdown. Lo stesso vale per gli attributi che Quarto documenta e che il tema, riscrivendo il markup, rischia di perdere per strada: se un attributo viene ignorato in silenzio, l'utente non ha modo di accorgersene.
 
@@ -89,6 +94,8 @@ Il profilo comune: sa scrivere Markdown, non necessariamente SCSS o JavaScript. 
 | Callout di Quarto → callout del design system | filtro Lua `at: pre-ast` |
 | `code-fold` sui blocchi di codice scritti a mano | filtro Lua `at: pre-ast` |
 | `collapse`, `appearance`, `icon` dei callout | filtro Lua `at: pre-ast` |
+| Shortcode `{{< icona >}}` | `bootstrap-italia-shortcodes.lua` |
+| Titolo delle card, link `read-more`, paragrafi di troppo nei componenti flex | filtro Lua `at: post-quarto` |
 | Icona del pulsante "copia", nome file, annotazioni di codice | `quarto-bootstrap-italia.css` |
 | Classe `.table` sulle tabelle | filtro Lua |
 | Raccordo per indice, codice, schede, didascalie | `quarto-bootstrap-italia.css` |

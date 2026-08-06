@@ -13,10 +13,10 @@ In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum fe
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<span class="card-signature">Sabato 5 aprile, ore 10.00</span>
-<h3 class="card-title h5">Giornata del verde pulito</h3>
-<p class="card-text">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-<a class="read-more" href="#"><span class="text">Vedi l'evento</span></a>
+[Sabato 5 aprile, ore 10.00]{.card-signature}
+### Giornata del verde pulito
+Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+[Vedi l'evento](#){.read-more}
 :::
 :::
 :::
@@ -26,10 +26,10 @@ In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum fe
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<span class="card-signature">Mercoledì 16 aprile, ore 18.30</span>
-<h3 class="card-title h5">Consiglio comunale aperto</h3>
-<p class="card-text">Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.</p>
-<a class="read-more" href="#"><span class="text">Vedi l'evento</span></a>
+[Mercoledì 16 aprile, ore 18.30]{.card-signature}
+### Consiglio comunale aperto
+Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
+[Vedi l'evento](#){.read-more}
 :::
 :::
 :::

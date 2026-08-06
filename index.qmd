@@ -88,9 +88,9 @@ unico posto: è il banco di prova del tema.
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Design system completo</h3>
-<p class="card-text">CSS ufficiale di Bootstrap Italia, font Titillium Web, Lora e Roboto Mono,
-sprite delle 179 icone, JavaScript dei componenti. Tutto locale, nessun servizio esterno.</p>
+### Design system completo
+CSS ufficiale di Bootstrap Italia, font Titillium Web, Lora e Roboto Mono,
+sprite delle 179 icone, JavaScript dei componenti. Tutto locale, nessun servizio esterno.
 :::
 :::
 :::
@@ -100,9 +100,9 @@ sprite delle 179 icone, JavaScript dei componenti. Tutto locale, nessun servizio
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Ricerca full text</h3>
-<p class="card-text">L'interfaccia di ricerca di Quarto sparisce insieme al suo tema: qui ce n'è
-una che legge lo stesso indice e usa i componenti del design system.</p>
+### Ricerca full text
+L'interfaccia di ricerca di Quarto sparisce insieme al suo tema: qui ce n'è
+una che legge lo stesso indice e usa i componenti del design system.
 :::
 :::
 :::
@@ -112,9 +112,9 @@ una che legge lo stesso indice e usa i componenti del design system.</p>
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Accessibilità verificata</h3>
-<p class="card-text">Nessuna violazione WCAG 2.1 AA, controllata a ogni modifica: se il controllo
-non passa, il sito non viene pubblicato.</p>
+### Accessibilità verificata
+Nessuna violazione WCAG 2.1 AA, controllata a ogni modifica: se il controllo
+non passa, il sito non viene pubblicato.
 :::
 :::
 :::
@@ -124,9 +124,9 @@ non passa, il sito non viene pubblicato.</p>
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Icone senza percorsi</h3>
-<p class="card-text">Lo sprite è già nella pagina: un'icona si richiama con
-<code>&lt;use href="#it-search"&gt;</code> e funziona da qualunque sottocartella.</p>
+### Icone senza percorsi
+Lo sprite è già nella pagina: un'icona si richiama con
+<code>&lt;use href="#it-search"&gt;</code> e funziona da qualunque sottocartella.
 :::
 :::
 :::
@@ -142,7 +142,7 @@ il markup di Bootstrap Italia, lo sprite delle icone inserito nella pagina, il J
 dichiarato come dipendenza, e le parti che Quarto genera con classi proprie — indice, schede,
 elenchi, didascalie, numeri di riga — vestite come il design system.
 
-<p class="mt-4">
-  <a class="btn btn-primary" href="https://github.com/aborruso/quarto-bootstrap-italia">Vai al progetto su GitHub</a>
-  <a class="btn btn-outline-primary" href="/demo.html">Guarda i contenuti Quarto</a>
-</p>
+::: {.mt-4}
+[Vai al progetto su GitHub](https://github.com/aborruso/quarto-bootstrap-italia){.btn .btn-primary}
+[Guarda i contenuti Quarto](/demo.html){.btn .btn-outline-primary}
+:::

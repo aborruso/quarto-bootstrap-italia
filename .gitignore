@@ -10,3 +10,6 @@ quarto/
 *_files/
 node_modules/
 package-lock.json
+
+# materiale temporaneo di prova
+tmp/

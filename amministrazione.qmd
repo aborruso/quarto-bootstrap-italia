@@ -15,9 +15,9 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Consiglio</h3>
-<p class="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.</p>
-<a class="read-more" href="#"><span class="text">Leggi di più</span></a>
+### Consiglio
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+[Leggi di più](#){.read-more}
 :::
 :::
 :::
@@ -27,9 +27,9 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Giunta</h3>
-<p class="card-text">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-<a class="read-more" href="#"><span class="text">Leggi di più</span></a>
+### Giunta
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+[Leggi di più](#){.read-more}
 :::
 :::
 :::
@@ -39,9 +39,9 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Uffici</h3>
-<p class="card-text">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.</p>
-<a class="read-more" href="#"><span class="text">Leggi di più</span></a>
+### Uffici
+Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.
+[Leggi di più](#){.read-more}
 :::
 :::
 :::

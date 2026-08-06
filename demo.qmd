@@ -208,9 +208,11 @@ Accanto ai contenuti di Quarto si possono usare le classi del design system.
 ::: {.card-wrapper .card-space}
 ::: {.card .card-bg}
 ::: {.card-body}
-<h3 class="card-title h5">Card</h3>
-<p class="card-text">Testo della card, con il font di lettura del design system.</p>
-<a class="read-more" href="#"><span class="text">Leggi di più</span></a>
+### Card
+
+Testo della card, con il font di lettura del design system.
+
+[Leggi di più](#){.read-more}
 :::
 :::
 :::
@@ -219,28 +221,49 @@ Accanto ai contenuti di Quarto si possono usare le classi del design system.
 ::: {.col-12 .col-md-6}
 ::: {.card-wrapper}
 ::: {.card .card-teaser .shadow}
-<svg class="icon icon-primary"><use href="#it-file"></use></svg>
+{{< icona it-file primary >}}
+
 ::: {.card-body}
-<h3 class="card-title h5">Card teaser</h3>
-<p class="card-text">La variante compatta, con icona a sinistra.</p>
+### Card teaser
+
+La variante compatta, con icona a sinistra.
 :::
 :::
 :::
 :::
 
 ::: {.col-12}
-<div class="btn-group" role="group">
-  <button type="button" class="btn btn-primary">Primario</button>
-  <button type="button" class="btn btn-outline-primary">Secondario</button>
-</div>
+::: {.btn-group role="group"}
+[Primario](#){.btn .btn-primary}
+[Secondario](#){.btn .btn-outline-primary}
+:::
 
-<div class="progress mt-4">
-  <div class="progress-bar" role="progressbar" aria-label="Avanzamento della pratica" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
+::: {.progress .mt-4}
+::: {.progress-bar role="progressbar" aria-label="Avanzamento della pratica" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"}
+:::
+:::
 
-<div class="chip chip-simple mt-4">
-  <span class="chip-label">Etichetta</span>
-</div>
+Etichette (chip), nelle varianti del design system:
+
+::: {.chip .chip-simple .mt-4}
+[Etichetta]{.chip-label}
+:::
+::: {.chip .chip-simple .chip-primary .mt-4}
+[Primaria]{.chip-label}
+:::
+::: {.chip .chip-simple .chip-success .mt-4}
+[Successo]{.chip-label}
+:::
+::: {.chip .chip-simple .chip-danger .mt-4}
+[Errore]{.chip-label}
+:::
+::: {.chip .chip-lg .chip-simple .chip-primary .mt-4}
+[Grande]{.chip-label}
+:::
+
+Badge:
+
+[Nuovo]{.badge .bg-primary} [In corso]{.badge .bg-warning} [Concluso]{.badge .bg-success} [Scaduto]{.badge .bg-danger} [Bozza]{.badge .badge-outline-secondary} [12]{.badge .bg-primary .rounded-pill}
 :::
 
 :::

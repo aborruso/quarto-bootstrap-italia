@@ -22,6 +22,9 @@ contributes:
       # aspetta, e il post-processor ne crea un secondo dentro <main>
       template-partials:
         - partials/title-block.html
+      shortcodes:
+        # {{< icona it-file >}} al posto dell'SVG scritto a mano
+        - bootstrap-italia-shortcodes.lua
       filters:
         # i callout di Quarto resi con il markup di Bootstrap Italia, prima che
         # Quarto li degradi a blockquote (senza il suo tema non li sa disegnare)
@@ -30,5 +33,8 @@ contributes:
         # code-fold anche sui blocchi di codice scritti a mano, non solo sulle celle
         - at: pre-ast
           path: bootstrap-italia-code.lua
-        # JavaScript del design system, sprite delle icone, ricerca
-        - bootstrap-italia.lua
+        # JavaScript del design system, sprite delle icone, ricerca, raccordo del
+        # markup dei componenti. Gira a valle di tutto: prima gli shortcode sono
+        # ancora segnaposto e il markup non è quello definitivo.
+        - at: post-quarto
+          path: bootstrap-italia.lua
