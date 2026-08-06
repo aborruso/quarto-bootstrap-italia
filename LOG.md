@@ -3,6 +3,8 @@
 ## 2026-08-06
 
 - `code-fold` non funzionava sui blocchi di codice scritti a mano: Quarto lo applica solo ai blocchi con classe `cell-code`, cioè alle celle eseguibili. Nuovo filtro `bootstrap-italia-code.lua` (`at: pre-ast`) che aggiunge quella classe ai blocchi che chiedono il fold, così nel Markdown si scrive solo la sintassi documentata; CSS per il `<summary>`, che senza il tema di Quarto usciva senza stile
+- Verificato che `code-fold: true` nel front matter **non** è raggiungibile dai filtri delle estensioni (non arriva né in `meta` né in `param`, a nessuna fase): il fold va chiesto blocco per blocco. Il riepilogo predefinito è invece già in italiano ("Codice"), tradotto da `lang: it`
+- Ricognizione sugli attributi che Quarto documenta per i callout (`title`, `collapse`, `appearance`, `icon`): il filtro del tema consuma solo `title`, gli altri tre vengono ignorati in silenzio
 
 ## 2026-08-05
 

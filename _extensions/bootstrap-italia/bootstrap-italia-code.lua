@@ -13,32 +13,19 @@
 
   Gira `at: pre-ast`, prima del filtro di Quarto che trasforma il blocco in
   <details>.
+
+  Nota: il fold va chiesto blocco per blocco. `code-fold: true` nel front matter
+  è un'opzione di formato e non è leggibile dai filtri delle estensioni (non
+  arriva né in `meta` né in `param`), quindi non ha effetto sui blocchi statici.
 ]]
 
-local fold_di_default = false
-
-local function vero(v)
-  local s = pandoc.utils.stringify(v)
-  return s == 'true' or s == '1' or s == 'show'
-end
-
 return {
-  {
-    Meta = function(meta)
-      -- `code-fold` nel front matter o in _quarto.yml vale per tutti i blocchi
-      if meta['code-fold'] ~= nil and vero(meta['code-fold']) then
-        fold_di_default = true
-      end
-      return meta
-    end,
-  },
   {
     CodeBlock = function(block)
       if not quarto.doc.is_format('html:js') then
         return nil
       end
-      local chiede_fold = fold_di_default
-        or block.attributes['code-fold'] ~= nil
+      local chiede_fold = block.attributes['code-fold'] ~= nil
         or block.attributes['code-summary'] ~= nil
       if not chiede_fold or block.classes:includes('cell-code') then
         return nil

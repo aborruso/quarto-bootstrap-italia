@@ -124,7 +124,7 @@ main div.sourceCode {
 main details.code-fold > summary {
   cursor: pointer;
   margin-bottom: 0.5rem;
-  color: #06c;
+  color: var(--bs-primary, #0066cc);
   font-size: 0.9rem;
 }
 
