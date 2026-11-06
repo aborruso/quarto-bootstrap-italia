@@ -34,6 +34,9 @@ jobs:
             || { echo "FALLITO il CSS dei token non corrisponde: rieseguire scripts/genera-token.py"; exit 1; }
           echo "ok      CSS dei token allineato"
 
+      - name: Il CSS del tema usa solo le variabili dei colori
+        run: python3 scripts/controlla-colori.py
+
       - name: Render del sito
         run: quarto render
 

@@ -1,6 +1,76 @@
+/* Colori neutri propri del tema, che il design system scrive come valori fissi.
+   Come le altre variabili --bi-…, si cambiano in un foglio di stile proprio. */
+:root {
+  --bi-surface: #f5f6f7;
+  --bi-surface-dark: #e9ecef;
+  --bi-caption: hsl(0, 0%, 32%);
+}
+
 /* Raccordo tra il markup generato da Quarto e Bootstrap Italia.
    Copre i contenuti che Quarto produce con classi proprie, e che senza il suo
    tema Bootstrap resterebbero senza stile. */
+
+/* --- classi di utilità ----------------------------------------------------- */
+
+/* Nel design system `.bg-primary` e simili usano --bs-primary-rgb, una terna RGB
+   fissa che non deriva da --bi-primary: senza queste regole `[Nuovo]{.badge .bg-primary}`
+   resterebbe blu con qualunque palette. L'opacità di `.bg-opacity-*` resta valida. */
+
+.bg-primary {
+  background-color: color-mix(in srgb, var(--bi-primary, #06c) calc(var(--bs-bg-opacity, 1) * 100%), transparent) !important;
+}
+
+.border-primary {
+  border-color: color-mix(in srgb, var(--bi-primary, #06c) calc(var(--bs-border-opacity, 1) * 100%), transparent) !important;
+}
+
+.text-primary {
+  color: color-mix(in srgb, var(--bi-primary, #06c) calc(var(--bs-text-opacity, 1) * 100%), transparent) !important;
+}
+
+.bg-secondary {
+  background-color: color-mix(in srgb, var(--bi-secondary, #5d7083) calc(var(--bs-bg-opacity, 1) * 100%), transparent) !important;
+}
+
+.border-secondary {
+  border-color: color-mix(in srgb, var(--bi-secondary, #5d7083) calc(var(--bs-border-opacity, 1) * 100%), transparent) !important;
+}
+
+.bg-success {
+  background-color: color-mix(in srgb, var(--bi-success, #008055) calc(var(--bs-bg-opacity, 1) * 100%), transparent) !important;
+}
+
+.border-success {
+  border-color: color-mix(in srgb, var(--bi-success, #008055) calc(var(--bs-border-opacity, 1) * 100%), transparent) !important;
+}
+
+.text-success {
+  color: color-mix(in srgb, var(--bi-success, #008055) calc(var(--bs-text-opacity, 1) * 100%), transparent) !important;
+}
+
+.bg-warning {
+  background-color: color-mix(in srgb, var(--bi-warning, #995c00) calc(var(--bs-bg-opacity, 1) * 100%), transparent) !important;
+}
+
+.border-warning {
+  border-color: color-mix(in srgb, var(--bi-warning, #995c00) calc(var(--bs-border-opacity, 1) * 100%), transparent) !important;
+}
+
+.text-warning {
+  color: color-mix(in srgb, var(--bi-warning, #995c00) calc(var(--bs-text-opacity, 1) * 100%), transparent) !important;
+}
+
+.bg-danger {
+  background-color: color-mix(in srgb, var(--bi-danger, #cc334d) calc(var(--bs-bg-opacity, 1) * 100%), transparent) !important;
+}
+
+.border-danger {
+  border-color: color-mix(in srgb, var(--bi-danger, #cc334d) calc(var(--bs-border-opacity, 1) * 100%), transparent) !important;
+}
+
+.text-danger {
+  color: color-mix(in srgb, var(--bi-danger, #cc334d) calc(var(--bs-text-opacity, 1) * 100%), transparent) !important;
+}
 
 /* --- blocco titolo ------------------------------------------------------- */
 
@@ -13,7 +83,7 @@ header#title-block-header .title {
 }
 
 header#title-block-header .subtitle {
-  color: #5b6f82;
+  color: var(--bi-secondary, #5d7083);
   font-size: 1.25rem;
 }
 
@@ -22,8 +92,8 @@ header#title-block-header .subtitle {
 nav#TOC {
   padding: 1.5rem;
   margin-bottom: 2rem;
-  border-left: 4px solid var(--bs-primary, #0066cc);
-  background-color: #f5f6f7;
+  border-left: 4px solid var(--bi-primary, #06c);
+  background-color: var(--bi-surface);
 }
 
 nav#TOC #toc-title {
@@ -57,13 +127,13 @@ main table > caption,
 main .table > caption {
   padding: 0.5rem 0;
   text-align: left;
-  color: #5b6f82;
+  color: var(--bi-secondary, #5d7083);
   font-size: 0.875rem;
 }
 
 /* didascalie di figure e tabelle con riferimento incrociato (@fig- e @tbl-) */
 main .quarto-float-caption {
-  color: #5b6f82;
+  color: var(--bi-secondary, #5d7083);
   font-size: 0.875rem;
   padding: 0.5rem 0;
 }
@@ -80,8 +150,8 @@ main .table-responsive {
 
 main div.sourceCode,
 main pre:not(.sourceCode) {
-  background-color: #f5f6f7;
-  border: 1px solid #d9dadb;
+  background-color: var(--bi-surface);
+  border: 1px solid var(--bi-border-light, #d8d9da);
   border-radius: 4px;
   padding: 1rem 1.25rem;
   margin-bottom: 1.5rem;
@@ -98,7 +168,7 @@ main pre.sourceCode {
 
 main code:not(.sourceCode) {
   padding: 0.1em 0.3em;
-  background-color: #f5f6f7;
+  background-color: var(--bi-surface);
   border-radius: 3px;
 }
 
@@ -148,8 +218,8 @@ main div.sourceCode {
 main .code-with-filename .code-with-filename-file {
   margin-bottom: 0;
   padding: 0.4rem 1rem;
-  background-color: #e9ecef;
-  border: 1px solid #d9dadb;
+  background-color: var(--bi-surface-dark);
+  border: 1px solid var(--bi-border-light, #d8d9da);
   border-bottom: 0;
   border-radius: 4px 4px 0 0;
 }
@@ -173,9 +243,9 @@ main .code-annotation-anchor {
   min-width: 1.4em;
   height: 1.4em;
   margin-right: 0.5rem;
-  border: 1px solid var(--bs-primary, #0066cc);
+  border: 1px solid var(--bi-primary, #06c);
   border-radius: 50%;
-  color: var(--bs-primary, #0066cc);
+  color: var(--bi-primary, #06c);
   font-size: 0.75rem;
   line-height: 1.3em;
   text-align: center;
@@ -184,7 +254,7 @@ main .code-annotation-anchor {
 }
 
 main .code-annotation-anchor:hover {
-  background-color: var(--bs-primary, #0066cc);
+  background-color: var(--bi-primary, #06c);
   color: #fff;
 }
 
@@ -199,9 +269,9 @@ main dl.code-annotation-container-grid {
 main dl.code-annotation-container-grid > dt {
   min-width: 1.4em;
   height: 1.4em;
-  border: 1px solid var(--bs-primary, #0066cc);
+  border: 1px solid var(--bi-primary, #06c);
   border-radius: 50%;
-  color: var(--bs-primary, #0066cc);
+  color: var(--bi-primary, #06c);
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.3em;
@@ -228,7 +298,7 @@ main .code-copy-outer-scaffold:has(pre.code-annotated) .code-copy-button {
 main details.code-fold > summary {
   cursor: pointer;
   margin-bottom: 0.5rem;
-  color: var(--bs-primary, #0066cc);
+  color: var(--bi-primary, #06c);
   font-size: 0.9rem;
 }
 
@@ -248,25 +318,25 @@ main ul.panel-tabset-tabby {
   list-style: none;
   padding-left: 0;
   margin-bottom: 0;
-  border-bottom: 1px solid #d9dadb;
+  border-bottom: 1px solid var(--bi-border-light, #d8d9da);
 }
 
 main ul.panel-tabset-tabby > li > a {
   display: block;
   padding: 0.75rem 1.25rem;
   font-weight: 600;
-  color: var(--bs-primary, #0066cc);
+  color: var(--bi-primary, #06c);
   text-decoration: none;
   border-bottom: 4px solid transparent;
 }
 
 main ul.panel-tabset-tabby > li > a:hover {
-  background-color: #f5f6f7;
+  background-color: var(--bi-surface);
 }
 
 main ul.panel-tabset-tabby > li > a[aria-selected='true'] {
-  color: #17324d;
-  border-bottom-color: var(--bs-primary, #0066cc);
+  color: var(--bi-primary-dark, #17324d);
+  border-bottom-color: var(--bi-primary, #06c);
 }
 
 main .panel-tabset .tab-content {
@@ -295,7 +365,7 @@ main .quarto-figure-center figcaption {
 main figure figcaption,
 main .figure-caption {
   font-size: 0.875rem;
-  color: hsl(0, 0%, 32%);
+  color: var(--bi-caption);
 }
 
 /* --- note a piè di pagina ------------------------------------------------ */
@@ -303,7 +373,7 @@ main .figure-caption {
 main section.footnotes {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #d9dadb;
+  border-top: 1px solid var(--bi-border-light, #d8d9da);
   font-size: 0.875rem;
 }
 
@@ -325,11 +395,11 @@ main .quarto-post {
   flex-wrap: wrap;
   gap: 1rem 2rem;
   padding: 1.5rem 0;
-  border-top: 1px solid #d9dadb;
+  border-top: 1px solid var(--bi-border-light, #d8d9da);
 }
 
 main .quarto-post:last-child {
-  border-bottom: 1px solid #d9dadb;
+  border-bottom: 1px solid var(--bi-border-light, #d8d9da);
 }
 
 main .quarto-post .body {
@@ -354,7 +424,7 @@ main .quarto-post .metadata a {
 }
 
 main .quarto-post .listing-title a {
-  color: var(--bs-primary, #0066cc);
+  color: var(--bi-primary, #06c);
 }
 
 main .quarto-post .listing-title a:hover,
@@ -367,7 +437,7 @@ main .quarto-post .listing-description p {
 }
 
 main .quarto-post .listing-date {
-  color: #5b6f82;
+  color: var(--bi-secondary, #5d7083);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -469,7 +539,7 @@ main .quarto-grid-item .listing-category {
 }
 
 main .quarto-grid-item .card-attribution {
-  color: #5b6f82;
+  color: var(--bi-secondary, #5d7083);
 }
 
 main .quarto-grid-item .listing-description p {
@@ -524,8 +594,8 @@ main pre.numberSource code > span > a:first-child::before {
   margin-right: 1rem;
   padding-right: 0.5rem;
   text-align: right;
-  color: #5b6f82;
-  border-right: 1px solid #d9dadb;
+  color: var(--bi-secondary, #5d7083);
+  border-right: 1px solid var(--bi-border-light, #d8d9da);
   user-select: none;
 }
 
@@ -540,12 +610,12 @@ main table:not(.table) {
   width: 100%;
   margin-bottom: 1rem;
   vertical-align: top;
-  border-color: var(--bs-border-color, #d9dadb);
+  border-color: var(--bi-border-light, #d8d9da);
 }
 
 main table:not(.table) > :not(caption) > * > * {
   padding: 0.5rem 0.5rem;
-  border-bottom: 1px solid var(--bs-border-color, #d9dadb);
+  border-bottom: 1px solid var(--bi-border-light, #d8d9da);
 }
 
 main table:not(.table) > thead {

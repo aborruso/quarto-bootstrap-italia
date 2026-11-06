@@ -229,6 +229,8 @@ Cambiano insieme intestazione, menu, piè di pagina, collegamenti, bottoni, call
 | `--bi-success`, `--bi-warning`, `--bi-danger` | `#008055`, `#995C00`, `#CC334D` | callout e messaggi |
 | `--bi-border`, `--bi-border-light` | `#C5C7C9`, `#D8D9DA` | bordi e separatori |
 | `--bi-text` | `#1A1A1A` | testo corrente |
+| `--bi-surface`, `--bi-surface-dark` | `#F5F6F7`, `#E9ECEF` | fondi di codice, indice e schede |
+| `--bi-caption` | grigio al 32% | didascalie |
 
 Cambiando la palette va controllato il contrasto: le combinazioni del design system sono verificate, le proprie no. Il [profilo di accessibilità](#controllare-laccessibilità) segnala i contrasti insufficienti.
 
