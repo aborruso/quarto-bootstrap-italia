@@ -9,10 +9,12 @@ Sito di esempio e guida: <https://aborruso.github.io/quarto-bootstrap-italia/>
 ## Installazione
 
 ```bash
-quarto add aborruso/quarto-bootstrap-italia
+quarto add aborruso/quarto-bootstrap-italia@0.2.0
 ```
 
-Serve Quarto 1.10 o successivo: il tema usa la fase `pre-ast` per i filtri e `quarto.project.offset`, ed è stato verificato su 1.10.20.
+Con `@versione` si installa una versione precisa; senza, l'ultimo commit di `main`. Le novità e i cambiamenti da adeguare sono nel [changelog](CHANGELOG.md).
+
+Serve Quarto 1.10.18 o successivo: il tema usa la fase `pre-ast` per i filtri e `quarto.project.offset`, ed è stato verificato su 1.10.20.
 
 Poi nel documento o in `_quarto.yml`:
 

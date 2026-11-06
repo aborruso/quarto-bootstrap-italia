@@ -148,7 +148,7 @@ Principio: chi scrive usa Quarto come ogni giorno, il tema fa il resto. Nessuna 
 - [ ] **Ricerca**: il ranking è elementare (sottostringa, niente fuzzy né stemming) e non evidenzia i termini trovati
 - [ ] **Bootstrap Italia 3.x**: oggi in beta (3.0.0-beta.8 del 2026-11-05), da affrontare quando esce stabile
 - [ ] Il partial `title-block.html` è essenziale: non mostra autori con ORCID né altri metadati ricchi. Da estendere se servirà
-- [ ] `quarto-required: ">=1.10.0"` è prudenziale: verificato su 1.10.18 e 1.10.20, non si sa da quale versione funzionino `at: pre-ast` e `quarto.project.offset`
+- [x] `quarto-required` portato a `>=1.10.18`, la versione più vecchia provata (2026-11-06)
 
 ## Review
 

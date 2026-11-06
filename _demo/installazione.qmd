@@ -6,7 +6,7 @@ toc: true
 
 ## Che cosa serve
 
-**Quarto 1.10 o successivo**. Si scarica da [quarto.org](https://quarto.org/docs/download/) per
+**Quarto 1.10.18 o successivo**. Si scarica da [quarto.org](https://quarto.org/docs/download/) per
 Windows, macOS e Linux; per verificare la versione installata:
 
 ```bash
