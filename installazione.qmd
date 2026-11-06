@@ -24,7 +24,7 @@ Dentro la cartella del progetto:
 quarto add aborruso/quarto-bootstrap-italia
 ```
 
-Quarto chiede conferma e crea la cartella `_extensions/bootstrap-italia/`. È una cartella come le
+Quarto chiede conferma e crea la cartella `_extensions/aborruso/bootstrap-italia/`. È una cartella come le
 altre del progetto: va messa sotto controllo di versione insieme al resto.
 
 ## Usarlo in un documento singolo
@@ -78,7 +78,11 @@ quarto use template aborruso/quarto-bootstrap-italia
 ```
 
 Poi si cambiano in `_quarto.yml` il nome dell'ente, le voci di menu, i contatti e i collegamenti del
-piè di pagina. Le pagine di esempio (`demo.qmd`, la cartella `img/`) si possono cancellare.
+piè di pagina.
+
+Il modello arriva con il sito dimostrativo: le notizie e le immagini in `notizie/`, inventate, e le
+pagine `demo.qmd` e `installazione.qmd`. Si cancellano quando non servono più, togliendo anche le
+voci corrispondenti dal menu in `_quarto.yml`. La cartella `img/` serve solo a `demo.qmd`.
 
 ## Le icone
 

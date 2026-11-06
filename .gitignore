@@ -1,8 +1,8 @@
 _site/
 _a11y/
 .quarto/
-# installazione locale di Quarto (447 MB)
-quarto/
+# installazione locale di Quarto (447 MB): il prefisso _ la tiene fuori dal render
+_quarto-bin/
 
 /.quarto/
 **/*.quarto_ipynb

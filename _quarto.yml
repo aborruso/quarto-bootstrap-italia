@@ -1,13 +1,9 @@
 project:
   type: website
   output-dir: _site
-  # serve solo in questo repo, dove Quarto è installato in ./quarto: senza l'esclusione
-  # il render prova a processare i .qmd dei template interni di Quarto e fallisce.
-  # In un progetto normale questa riga si può togliere.
+  # solo le pagine .qmd: README e altri .md del progetto restano fuori dal sito
   render:
     - "*.qmd"
-    - "notizie/**"
-    - "!quarto/**"
 
 website:
   title: "Nome dell'Istituzione"

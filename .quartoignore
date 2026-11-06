@@ -1,4 +1,7 @@
-quarto/
+_quarto-bin/
+LOG.md
+package.json
+scripts/
 tasks/
 docs/
 _site/

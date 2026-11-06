@@ -6,7 +6,7 @@ Un formato Quarto riutilizzabile che veste siti e documenti HTML con Bootstrap I
 
 ## Fase 1 — Ricognizione
 
-- [x] Quarto 1.10.18 installato in `./quarto`
+- [x] Quarto 1.10.18 installato in `./quarto` (dal 2026-11-06 `_quarto-bin/`, versione 1.10.20)
 - [x] Come si sostituisce il CSS in Quarto (deepwiki su `quarto-dev/quarto-web`):
   - `theme: <nome|scss>` → tema Bootstrap gestito da Quarto (25 Bootswatch + layering SCSS)
   - `css: file.css` → si sovrappone al tema, per ritocchi
@@ -138,7 +138,7 @@ Principio: chi scrive usa Quarto come ogni giorno, il tema fa il resto. Nessuna 
 
 ### Aperto — tracciato su GitHub
 
-- [ ] [#1](https://github.com/aborruso/quarto-bootstrap-italia/issues/1) Verificare `quarto add` e `quarto use template` **dal remoto**: il percorso di installazione non è mai stato eseguito per intero
+- [ ] [#1](https://github.com/aborruso/quarto-bootstrap-italia/issues/1) Verificare `quarto add` e `quarto use template` **dal remoto**: il percorso di installazione non è mai stato eseguito per intero. Provato il 2026-11-06 su 1.10.20 dal commit `01f3902`: tutti i percorsi rendono. Corretti il percorso in `installazione.qmd` e i file interni copiati dal template; il sito dimostrativo resta nel template, con le istruzioni per toglierlo
 - [ ] [#2](https://github.com/aborruso/quarto-bootstrap-italia/issues/2) Verificare l'output di codice eseguito (knitr e Jupyter): tabelle `df-print`, grafici, output delle celle
 - [ ] [#3](https://github.com/aborruso/quarto-bootstrap-italia/issues/3) I riferimenti incrociati ai callout non si risolvono (`@tip-uno` → `?@tip-uno`): il filtro riscrive il callout in HTML grezzo a `pre-ast`, prima che i crossref di Quarto lo vedano
 
