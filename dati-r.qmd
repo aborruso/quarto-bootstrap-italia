@@ -1,0 +1,80 @@
+---
+title: "Dati e grafici con R"
+subtitle: "Tabelle, grafici e output di celle eseguite con knitr"
+engine: knitr
+execute:
+  freeze: auto
+---
+
+Le tabelle e i grafici di questa pagina nascono dal codice, con dati di esempio inventati. Il risultato è conservato in `_freeze/`: per rigenerare il sito non serve R, finché il sorgente della pagina non cambia.
+
+```{r}
+#| include: false
+servizi <- data.frame(
+  servizio = c("Anagrafe", "Tributi", "Scuola", "Mobilità"),
+  richieste = c(12400, 8300, 5100, 2900),
+  online = c(0.62, 0.48, 0.81, 0.37)
+)
+```
+
+## Tabelle
+
+L'output normale di R resta testo a larghezza fissa.
+
+```{r}
+servizi
+```
+
+Con `knitr::kable()` diventa una tabella del design system, come @tbl-servizi.
+
+```{r}
+#| label: tbl-servizi
+#| tbl-cap: "Richieste per servizio nel 2026"
+knitr::kable(servizi)
+```
+
+`rmarkdown::paged_table()` la rende sfogliabile.
+
+```{r}
+rmarkdown::paged_table(servizi)
+```
+
+Una tabella larga scorre dentro il suo riquadro.
+
+```{r}
+larga <- as.data.frame(matrix(round(seq(0.1, 4.2, by = 0.1), 1), nrow = 3))
+names(larga) <- paste0("indicatore_", seq_along(larga))
+knitr::kable(larga)
+```
+
+## Grafici
+
+```{r}
+#| label: fig-servizi
+#| fig-cap: "Richieste per servizio nel 2026"
+#| fig-alt: "Grafico a barre: Anagrafe 12.400 richieste, Tributi 8.300, Scuola 5.100, Mobilità 2.900"
+#| code-fold: true
+#| code-summary: "Mostra il codice"
+library(ggplot2)
+ggplot(servizi, aes(servizio, richieste)) +
+  geom_col(fill = "#0066CC") +
+  theme_minimal()
+```
+
+Il riferimento a @fig-servizi si risolve come nel resto del sito.
+
+## Output delle celle
+
+```{r}
+#| warning: true
+#| message: true
+#| error: true
+print("Elaborazione conclusa")
+message("Un messaggio")
+warning("Dati provvisori per il mese di dicembre")
+```
+
+```{r}
+#| error: true
+stop("Servizio non trovato")
+```

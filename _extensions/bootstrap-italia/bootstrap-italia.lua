@@ -96,12 +96,32 @@ local function read_more(link)
   return link
 end
 
+-- Quarto rende scorrevole l'output delle celle: una tabella larga deve essere
+-- raggiungibile anche da tastiera (WCAG 2.1.1).
+local function output_tabella(div)
+  local ha_tabella = false
+  div.content:walk({
+    Table = function()
+      ha_tabella = true
+    end,
+  })
+  if ha_tabella then
+    div.attributes['tabindex'] = '0'
+    div.attributes['role'] = 'region'
+    div.attributes['aria-label'] = 'Tabella, scorrevole in orizzontale'
+  end
+  return div
+end
+
 local function componenti(div)
   if not quarto.doc.is_format('html:js') then
     return nil
   end
   if ha_classe(div, SENZA_PARAGRAFO) then
     div = senza_paragrafo(div)
+  end
+  if div.classes:includes('cell-output-display') then
+    div = output_tabella(div)
   end
   if div.classes:includes('card-body') then
     div = card(div)

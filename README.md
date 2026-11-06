@@ -124,6 +124,15 @@ Le notizie si scrivono con le funzioni native di Quarto: `listing: type: grid` p
 
 Le notizie e le immagini di questo sito sono inventate; le immagini in `notizie/img/` sono generate al computer e servono solo da esempio.
 
+## Codice eseguito
+
+Tabelle e grafici di knitr e Jupyter escono con gli stili del design system, nelle pagine [`dati-python.qmd`](dati-python.qmd) e [`dati-r.qmd`](dati-r.qmd). Le due pagine usano `freeze: auto`: il risultato è in `_freeze/`, che va tenuto nel repository, e il sito si rigenera senza Python né R finché il sorgente non cambia. Chi modifica una di quelle pagine deve avere il motore: con Python, `QUARTO_PYTHON` indica l'interprete con `jupyter`, `pandas` e `matplotlib`.
+
+Due avvertenze per chi scrive:
+
+- ogni figura ha bisogno del proprio testo alternativo: `fig-alt`, anche in forma di elenco quando una cella produce più figure
+- `great_tables` inserisce nella pagina un CSS che toglie i bordi a tutte le tabelle, non solo alla propria: conviene non usarlo accanto ad altre tabelle
+
 ## Icone
 
 Lo sprite è già dentro la pagina, quindi le icone si richiamano con un riferimento interno, senza percorsi:

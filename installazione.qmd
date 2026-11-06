@@ -84,6 +84,15 @@ Il modello arriva con il sito dimostrativo: le notizie e le immagini in `notizie
 pagine `demo.qmd` e `installazione.qmd`. Si cancellano quando non servono più, togliendo anche le
 voci corrispondenti dal menu in `_quarto.yml`. La cartella `img/` serve solo a `demo.qmd`.
 
+## Il codice eseguito
+
+Tabelle e grafici prodotti da R e Python escono con gli stili del design system: si vedano le pagine
+[Python con Jupyter](dati-python.qmd) e [R con knitr](dati-r.qmd). Ogni figura ha bisogno del proprio
+testo alternativo, con `fig-alt`.
+
+Con `freeze: auto` nell'intestazione il risultato viene conservato in `_freeze/`: il sito si rigenera
+senza Python né R finché il sorgente della pagina non cambia.
+
 ## Le icone
 
 Lo sprite delle 179 icone del design system è già dentro ogni pagina, e si richiama con uno

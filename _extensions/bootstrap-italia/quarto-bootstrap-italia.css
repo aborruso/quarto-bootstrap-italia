@@ -555,3 +555,59 @@ main table:not(.table) > thead {
 main table:not(.table) > tbody {
   vertical-align: inherit;
 }
+
+/* --- output di codice eseguito (knitr, Jupyter) --------------------------- */
+
+main .cell-output-display img {
+  max-width: 100%;
+  height: auto;
+}
+
+main .quarto-float-tbl table {
+  text-align: start;
+}
+
+/* pandas allinea a destra le intestazioni ma non i valori */
+main table.dataframe td {
+  text-align: right;
+}
+
+main .cell-output-stderr pre {
+  border-left: 4px solid var(--bi-warning, #995c00);
+}
+
+main .cell-output-error pre {
+  border-left: 4px solid var(--bi-danger, #cc334d);
+}
+
+main .ansi-red-fg,
+main .ansi-red-intense-fg {
+  color: var(--bi-danger, #cc334d);
+}
+
+main .ansi-green-fg,
+main .ansi-green-intense-fg {
+  color: var(--bi-success, #008055);
+}
+
+main .ansi-yellow-fg,
+main .ansi-yellow-intense-fg {
+  color: var(--bi-warning, #995c00);
+}
+
+main .ansi-blue-fg,
+main .ansi-blue-intense-fg,
+main .ansi-cyan-fg,
+main .ansi-cyan-intense-fg {
+  color: var(--bi-primary, #06c);
+}
+
+main .ansi-magenta-fg,
+main .ansi-magenta-intense-fg {
+  color: var(--bi-secondary-dark, #435a70);
+}
+
+main .pagedtable-header-type,
+main .pagedtable-info {
+  color: var(--bi-secondary-dark, #435a70);
+}

@@ -276,3 +276,7 @@ flowchart LR
   B -->|sì| C[Accesso]
   B -->|no| D[Modulo pubblico]
 ```
+
+## Codice eseguito
+
+Tabelle, grafici e output di celle eseguite stanno in due pagine a parte, una per motore: [Python con Jupyter](dati-python.qmd) e [R con knitr](dati-r.qmd).

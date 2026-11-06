@@ -61,6 +61,10 @@ jobs:
           verifica _site/eventi.html 'aria-current="page"' 'voce di menu attiva calcolata al render'
           verifica _site/notizie/index.html 'href="../eventi.html"' 'link del menu relativi alla sottocartella'
           verifica _site/notizie/index.html 'quarto-grid-item' 'notizie in griglia'
+          # pagine con codice eseguito, rese da _freeze senza Python né R
+          verifica _site/dati-python.html 'cell-output-display' 'output di Jupyter da _freeze'
+          verifica _site/dati-r.html 'cell-output-display' 'output di knitr da _freeze'
+          verifica _site/dati-python.html 'tabindex="0"' 'tabelle larghe raggiungibili da tastiera'
           if grep -l '### ' _site/eventi.html _site/notizie/*.html; then
             echo "FALLITO cancelletti di un titolo rimasti nel testo"; fallito=1
           else
@@ -150,6 +154,8 @@ jobs:
           node scripts/a11y.mjs \
             http://localhost:8080/index.html \
             http://localhost:8080/demo.html \
+            http://localhost:8080/dati-python.html \
+            http://localhost:8080/dati-r.html \
             http://localhost:8080/servizi.html \
             http://localhost:8080/amministrazione.html \
             http://localhost:8080/eventi.html \
