@@ -65,6 +65,8 @@ Il riferimento a @fig-servizi si risolve come nel resto del sito.
 
 ## Output delle celle
 
+Gli esempi qui sotto sono voluti: mostrano come appaiono testo, messaggi, avvisi ed errori. La barra ambra indica messaggi e avvisi, quella rossa gli errori.
+
 ```{r}
 #| warning: true
 #| message: true
