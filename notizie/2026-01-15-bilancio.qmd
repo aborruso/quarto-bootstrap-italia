@@ -1,0 +1,26 @@
+---
+title: "Approvato il bilancio di previsione 2026"
+subtitle: "Più risorse per scuole e manutenzione delle strade, tariffe invariate"
+date: 2026-01-15
+categories: [Comunicati]
+image: img/consiglio.jpg
+image-alt: "Sala del Consiglio comunale con banchi in legno a semicerchio e soffitto affrescato"
+description: "Il Consiglio comunale ha approvato il documento con 11 voti favorevoli e 5 contrari, senza aumenti di tasse e tariffe."
+---
+
+Il Consiglio comunale, riunito lunedì 12 gennaio, ha approvato il bilancio di previsione 2026 con 11 voti favorevoli e 5 contrari. Tributi e tariffe dei servizi restano invariati.
+
+![La sala del Consiglio comunale.](img/consiglio.jpg){.rounded fig-alt="Sala del Consiglio comunale con banchi in legno a semicerchio e soffitto affrescato"}
+
+## Dove vanno le risorse
+
+| Voce | Milioni di euro |
+|------|----------------:|
+| Scuole e servizi educativi | 3,2 |
+| Strade e manutenzioni | 2,4 |
+| Servizi sociali | 2,1 |
+| Cultura e sport | 0,8 |
+
+: Principali voci di spesa
+
+Il testo completo e gli allegati sono consultabili nella sezione [Amministrazione](../amministrazione.qmd).

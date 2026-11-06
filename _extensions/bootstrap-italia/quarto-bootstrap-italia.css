@@ -275,15 +275,27 @@ main .panel-tabset .tab-content {
 
 /* --- figure -------------------------------------------------------------- */
 
+/* Quarto scrive `<figure>` e `<figcaption>` senza classi: qui prendono i valori di
+   `.figure`, `.figure-img` e `.figure-caption` del design system. */
+
 main figure {
   margin-bottom: 2rem;
 }
 
+main figure p:has(> img) {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+/* Quarto centra l'immagine: la didascalia la segue, come nel modello Comuni */
+main .quarto-figure-center figcaption {
+  text-align: center;
+}
+
 main figure figcaption,
 main .figure-caption {
-  padding-top: 0.5rem;
-  color: #5b6f82;
   font-size: 0.875rem;
+  color: hsl(0, 0%, 32%);
 }
 
 /* --- note a piè di pagina ------------------------------------------------ */
@@ -295,18 +307,17 @@ main section.footnotes {
   font-size: 0.875rem;
 }
 
-/* --- citazioni ----------------------------------------------------------- */
-
-main blockquote {
-  padding-left: 1.5rem;
-  border-left: 4px solid #d9dadb;
-  color: #5b6f82;
+/* la fonte di una citazione, `[Nome]{.blockquote-footer}`: il paragrafo che la
+   contiene non deve aggiungere altro spazio */
+main blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 /* --- listing (pagine di elenco: notizie, articoli, documenti) ------------- */
 
 main .quarto-listing {
   margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 main .quarto-post {
@@ -364,6 +375,119 @@ main .quarto-post .listing-date {
 
 main .quarto-listing .listing-actions-group {
   margin-bottom: 1.5rem;
+}
+
+/* griglia (`type: grid`): la griglia CSS sta nel tema di Quarto, assente qui.
+   La card è già quella del design system: si aggiunge solo ciò che manca. */
+
+main .quarto-listing .list.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  main .quarto-listing .list.grid.quarto-listing-cols-3,
+  main .quarto-listing .list.grid.quarto-listing-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  main .quarto-listing .list.grid.quarto-listing-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+main .quarto-grid-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+main .quarto-grid-item {
+  border: 1px solid var(--bi-border-light, #d8d9da);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* come `.no-after` del design system: niente spazio vuoto in fondo alla card */
+main .quarto-grid-item.card::after {
+  display: none;
+}
+
+main .quarto-grid-item .card-img-top {
+  margin: 0;
+}
+
+main .quarto-grid-item .thumbnail-image {
+  display: block;
+  object-fit: cover;
+}
+
+/* Quarto mette il titolo prima della categoria: il modello fa il contrario */
+main .quarto-grid-item .post-contents {
+  display: flex;
+  flex-direction: column;
+}
+
+main .quarto-grid-item .listing-categories {
+  order: -1;
+  margin-bottom: 0.5rem;
+}
+
+main .quarto-grid-item .card-attribution {
+  margin-top: auto;
+}
+
+main .quarto-grid-link .quarto-grid-item .card-title {
+  color: var(--bi-primary, #06c);
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+main .quarto-grid-link:hover .card-title {
+  text-decoration: underline;
+}
+
+main .quarto-title-block .title-categories {
+  margin-bottom: 0.5rem;
+}
+
+/* categoria e data come `.category-top` delle card del design system */
+main .quarto-grid-item .listing-category,
+main .quarto-grid-item .listing-date {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+main .quarto-grid-item .listing-category {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--bi-primary, #06c);
+}
+
+main .quarto-grid-item .card-attribution {
+  color: #5b6f82;
+}
+
+main .quarto-grid-item .listing-description p {
+  margin-bottom: 0.5rem;
+}
+
+main .listing-pagination .pagination {
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+main .quarto-listing-filter .input-group-text .bi {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.9 21.1l-5.1-5.1a8 8 0 1 0-.8.8l5.1 5.1zM4 10.5a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.9 21.1l-5.1-5.1a8 8 0 1 0-.8.8l5.1 5.1zM4 10.5a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 /* --- numeri di riga nel codice (```{.python .numberLines}) ---------------- */

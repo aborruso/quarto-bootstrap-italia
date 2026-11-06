@@ -25,7 +25,7 @@ jobs:
       - name: Installa Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: 1.10.18
+          version: 1.10.20
 
       - name: Il CSS con i token è allineato al sorgente
         run: |
@@ -56,6 +56,16 @@ jobs:
             'var(--bi-primary' 'colori esposti come variabili CSS'
           verifica _site/index.html 'bootstrap-italia.bundle.min.js' 'JavaScript del design system collegato'
           verifica _site/index.html '<symbol id="it-pa"' 'sprite delle icone inserito nella pagina'
+          # intestazione e menu generati da _quarto.yml
+          verifica _site/eventi.html 'class="it-header-wrapper"' 'intestazione generata'
+          verifica _site/eventi.html 'aria-current="page"' 'voce di menu attiva calcolata al render'
+          verifica _site/notizie/index.html 'href="../eventi.html"' 'link del menu relativi alla sottocartella'
+          verifica _site/notizie/index.html 'quarto-grid-item' 'notizie in griglia'
+          if grep -l '### ' _site/eventi.html _site/notizie/*.html; then
+            echo "FALLITO cancelletti di un titolo rimasti nel testo"; fallito=1
+          else
+            echo "ok      nessun titolo Markdown rimasto nel testo"
+          fi
           test -f _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/fonts.css \
             && echo "ok      fonts.css copiato" \
             || { echo "FALLITO fonts.css non copiato"; fallito=1; }
@@ -123,7 +133,7 @@ jobs:
       - name: Installa Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: 1.10.18
+          version: 1.10.20
 
       - name: Render del sito
         run: quarto render

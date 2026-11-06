@@ -12,6 +12,7 @@ contributes:
       # nativo nei browser e non richiede librerie esterne
       html-math-method: mathml
       anchor-sections: false
+      date-format: long
       css:
         # Bootstrap Italia con i colori esposti come variabili CSS (--bi-…),
         # generato da scripts/genera-token.py
@@ -38,3 +39,6 @@ contributes:
         # ancora segnaposto e il markup non è quello definitivo.
         - at: post-quarto
           path: bootstrap-italia.lua
+        # intestazione, menu e piè di pagina generati da _quarto.yml
+        - at: post-quarto
+          path: bootstrap-italia-chrome.lua

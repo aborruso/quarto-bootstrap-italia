@@ -1,0 +1,26 @@
+---
+title: "Lavori sul lungofiume: cambia la viabilità fino al 30 aprile"
+subtitle: "Rifacimento del manto stradale e dei marciapiedi nel tratto tra i due ponti"
+date: 2026-03-02
+categories: [Avvisi]
+image: img/lavori.jpg
+image-alt: "Macchina asfaltatrice al lavoro su una strada alberata lungo il fiume, tra barriere arancioni"
+description: "Senso unico alternato e divieto di sosta nel tratto interessato dal cantiere, con percorsi alternativi per gli autobus."
+evidenza: true
+---
+
+Da lunedì 9 marzo iniziano i lavori di rifacimento del manto stradale sul lungofiume, nel tratto compreso tra il ponte vecchio e il ponte della ferrovia. Il cantiere procede per tratti successivi e la conclusione è prevista per il 30 aprile.
+
+![Il primo tratto di cantiere, in direzione del centro storico.](img/lavori.jpg){.rounded fig-alt="Macchina asfaltatrice al lavoro su una strada alberata lungo il fiume, tra barriere arancioni"}
+
+## Le modifiche alla circolazione
+
+- senso unico alternato regolato da semaforo, dalle 7.30 alle 18
+- divieto di sosta su entrambi i lati nel tratto del cantiere
+- fermata degli autobus spostata davanti al mercato coperto
+
+I residenti possono ritirare il permesso di sosta temporaneo all'ufficio della Polizia locale.
+
+::: {.callout-warning title="Attenzione"}
+Le date possono cambiare in caso di maltempo. Gli aggiornamenti vengono pubblicati su questa pagina.
+:::

@@ -14,7 +14,7 @@ quarto --version
 ```
 
 Il tema usa la fase `pre-ast` per i filtri e `quarto.project.offset`, ed è stato verificato su
-1.10.18. Non serve nient'altro: Bootstrap Italia, i font e le icone arrivano con l'estensione.
+1.10.20. Non serve nient'altro: Bootstrap Italia, i font e le icone arrivano con l'estensione.
 
 ## Installare l'estensione
 
@@ -51,44 +51,34 @@ Nel `_quarto.yml` del progetto:
 project:
   type: website
 
+website:
+  title: "Nome del sito"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Servizi
+        href: servizi.qmd
+
+bootstrap-italia:
+  istituzione: Nome dell'Istituzione
+
 format:
-  bootstrap-italia-html:
-    include-before-body: partials/header.html
-    include-after-body: partials/footer.html
+  bootstrap-italia-html: default
 ```
 
-I due partial contengono l'intestazione e il piè di pagina istituzionali. Nel mezzo devono aprire
-e chiudere questa struttura:
-
-``` html
-<!-- alla fine di partials/header.html -->
-<div id="quarto-content">
-<main id="main-content" class="content container my-5">
-```
-
-``` html
-<!-- all'inizio di partials/footer.html -->
-</main>
-</div>
-```
-
-::: {.callout-important title="Non è decorativa"}
-Quarto usa `<main>` e `#quarto-content main.content` per collocare quello che genera. Senza
-`<main>` non costruisce l'indice di ricerca; senza `#quarto-content main.content` appende gli
-elenchi (`listing:`) in fondo alla pagina, fuori dal contenitore.
-:::
+Non serve scrivere HTML: intestazione, menu e piè di pagina li genera il tema. Il menu è il `website.navbar` standard di Quarto; il nome dell'ente, le lingue e le colonne del piè di pagina stanno sotto `bootstrap-italia:`. L'elenco completo delle chiavi è nel `README` del progetto, e il `_quarto.yml` di questo sito è un esempio completo.
 
 ## Partire da un sito già pronto
 
-Il modo più rapido è copiare l'esempio, che comprende `_quarto.yml`, la home, i partial di
-intestazione e piè di pagina e una pagina di elenco:
+Il modo più rapido è copiare l'esempio, che comprende `_quarto.yml`, la home e una pagina di elenco:
 
 ```bash
 quarto use template aborruso/quarto-bootstrap-italia
 ```
 
-Poi si sostituiscono i segnaposto: nome dell'ente, voci di menu, contatti, collegamenti del piè di
-pagina. Le pagine di esempio (`demo.qmd`, la cartella `img/`) si possono cancellare.
+Poi si cambiano in `_quarto.yml` il nome dell'ente, le voci di menu, i contatti e i collegamenti del
+piè di pagina. Le pagine di esempio (`demo.qmd`, la cartella `img/`) si possono cancellare.
 
 ## Le icone
 
@@ -112,15 +102,8 @@ bootstrap-italia-sprites: false
 ## La ricerca
 
 Quarto costruisce l'indice `search.json` per ogni sito; l'estensione ci mette sopra
-un'interfaccia con i componenti del design system. Serve che la ricerca sia attiva — `search: true`
-in `_quarto.yml`, che è il valore predefinito — e che nella pagina ci sia un elemento con
-l'attributo `data-bi-search`:
-
-``` html
-<a class="search-link rounded-icon" href="#" aria-label="Cerca nel sito" data-bi-search>
-  <svg class="icon"><use href="#it-search"></use></svg>
-</a>
-```
+un'interfaccia con i componenti del design system. Il pulsante nell'intestazione compare da solo,
+salvo `search: false` in `_quarto.yml`.
 
 Si può aprire anche da codice, con `window.biOpenSearch()`.
 

@@ -1,0 +1,19 @@
+---
+title: "Cento nuovi alberi al parco della Rimembranza"
+subtitle: "Una giornata di lavoro con le scuole e le associazioni del territorio"
+date: 2026-02-18
+categories: [Notizie]
+image: img/alberi.jpg
+image-alt: "Volontari che piantano giovani alberi su un prato, con le case del paese sullo sfondo"
+description: "Tigli, aceri e carpini per ombreggiare i viali: la messa a dimora è stata fatta con duecento volontari."
+---
+
+Sabato scorso duecento volontari hanno messo a dimora cento alberi nel parco della Rimembranza. Sono tigli, aceri e carpini scelti con l'ufficio Ambiente tra le specie più adatte al clima della zona.
+
+![La messa a dimora lungo il viale centrale del parco.](img/alberi.jpg){.rounded fig-alt="Volontari che piantano giovani alberi su un prato, con le case del paese sullo sfondo"}
+
+> Fra vent'anni questo viale sarà all'ombra, e a goderne saranno soprattutto i bambini che oggi hanno tenuto in mano la pala.
+>
+> [Una maestra della scuola primaria]{.blockquote-footer}
+
+Il Comune curerà l'irrigazione per i primi tre anni. Chi vuole partecipare alle prossime giornate può scrivere all'ufficio Ambiente.

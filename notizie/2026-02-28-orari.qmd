@@ -1,7 +1,26 @@
 ---
-title: "Nuovi orari degli sportelli"
+title: "Nuovi orari degli sportelli e appuntamenti online"
+subtitle: "Dal 1° marzo l'anagrafe riceve anche il giovedì pomeriggio"
 date: 2026-02-28
-description: "Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et magnis dis parturient montes."
+categories: [Comunicati]
+image: img/sportello.jpg
+image-alt: "Impiegato allo sportello che assiste un cittadino al banco del municipio"
+description: "L'anagrafe amplia l'apertura al pubblico. Per carta d'identità e residenza si prenota dal sito, senza attese."
+evidenza: true
 ---
 
-Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+Dal 1° marzo cambiano gli orari degli sportelli del municipio. L'anagrafe aggiunge un'apertura il giovedì pomeriggio, pensata per chi lavora di mattina.
+
+![Lo sportello dell'anagrafe al piano terra del municipio.](img/sportello.jpg){.rounded fig-alt="Impiegato allo sportello che assiste un cittadino al banco del municipio"}
+
+| Ufficio | Mattina | Pomeriggio |
+|---------|---------|------------|
+| Anagrafe | lunedì-venerdì, 8.30-12.30 | giovedì, 14.30-17.30 |
+| Tributi | martedì e venerdì, 9-12 | - |
+| Urbanistica | mercoledì, 9-12 | - |
+
+: Orari di apertura al pubblico
+
+## Prenotare un appuntamento
+
+Per la carta d'identità elettronica e i cambi di residenza si prenota dalla pagina dei [servizi](../servizi.qmd), con SPID o CIE. Per i certificati non serve l'appuntamento.

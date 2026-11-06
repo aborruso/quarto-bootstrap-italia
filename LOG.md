@@ -1,5 +1,13 @@
 # Log
 
+## 2026-11-06
+
+- Quarto del progetto e CI passati da 1.10.18 a 1.10.20. Confronto del sito reso con le due versioni: HTML uguale salvo `generator` e hash del CSS di evidenziazione. axe-core sulle pagine: nessuna violazione. Nuovo avviso al render: `variable used before declaration`, variabile `link-color`
+- `eventi.qmd`: nelle card i `###` restavano visibili, perché senza righe vuote firma, titolo e testo finivano in un solo paragrafo. Il difetto c'era anche con la 1.10.18
+- Intestazione, menu e piè di pagina non sono più partial scritti a mano: li genera `bootstrap-italia-chrome.lua` da `_quarto.yml`. Il menu è il `website.navbar` standard, letto dal file perché `website` non arriva ai filtri; il resto sta sotto `bootstrap-italia:`. La voce attiva è calcolata al render, senza JavaScript. Tolto «Accedi», lingue configurabili, nessuna intestazione sui documenti singoli
+- Notizie impostate sul modello Comuni con funzioni native: griglia `listing: type: grid`, `categories`, `image`, figure e citazioni in Markdown. Testi di esempio realistici su tutte le pagine, sei notizie con immagini generate. Figure e citazioni usano ora le regole di Bootstrap Italia, tolta la nostra regola su `blockquote`
+- Valutata l'estensione `mcanouil/quarto-highlight-text`: la 2.4.0 funziona col tema anche in callout, card, chip e tabelle; la 3.0.0 richiede Quarto >=1.10.19. Non adottata: per i colori bastano le classi del design system
+
 ## 2026-08-06
 
 - `code-fold` non funzionava sui blocchi di codice scritti a mano: Quarto lo applica solo ai blocchi con classe `cell-code`, cioè alle celle eseguibili. Nuovo filtro `bootstrap-italia-code.lua` (`at: pre-ast`) che aggiunge quella classe ai blocchi che chiedono il fold, così nel Markdown si scrive solo la sintassi documentata; CSS per il `<summary>`, che senza il tema di Quarto usciva senza stile

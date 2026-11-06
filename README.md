@@ -12,7 +12,7 @@ Sito di esempio e guida: <https://aborruso.github.io/quarto-bootstrap-italia/>
 quarto add aborruso/quarto-bootstrap-italia
 ```
 
-Serve Quarto 1.10 o successivo: il tema usa la fase `pre-ast` per i filtri e `quarto.project.offset`, ed è stato verificato su 1.10.18.
+Serve Quarto 1.10 o successivo: il tema usa la fase `pre-ast` per i filtri e `quarto.project.offset`, ed è stato verificato su 1.10.20.
 
 Poi nel documento o in `_quarto.yml`:
 
@@ -29,9 +29,7 @@ Per partire da un sito già impostato, con header e footer istituzionali (una vo
 quarto use template aborruso/quarto-bootstrap-italia
 ```
 
-Vengono creati `_quarto.yml`, `index.qmd` e `partials/` con l'intestazione e il piè di pagina del modello istituzionale, da adattare al proprio ente.
-
-Nei partial i link interni sono scritti come percorsi assoluti (`href="/"`): Quarto li riscrive come percorsi relativi alla pagina, quindi restano validi anche per le pagine nelle sottocartelle.
+Vengono creati `_quarto.yml` e `index.qmd`: intestazione, menu e piè di pagina nascono dalla configurazione, da adattare al proprio ente.
 
 ## Cosa porta con sé
 
@@ -47,28 +45,84 @@ Nei partial i link interni sono scritti come percorsi assoluti (`href="/"`): Qua
 
 Quarto genera l'indice `search.json` per ogni sito, ma la sua interfaccia di ricerca è agganciata al tema Bootstrap di Quarto e sparisce con `theme: none`. L'estensione ne fornisce una propria, che legge lo stesso indice e usa i componenti di Bootstrap Italia.
 
-Serve che nel sito la ricerca sia attiva (`search: true` in `_quarto.yml`, è il default) e che nella pagina ci sia un elemento con l'attributo `data-bi-search`:
-
-```html
-<a class="search-link rounded-icon" href="#" aria-label="Cerca nel sito" data-bi-search>
-  <svg class="icon"><use href="#it-search"></use></svg>
-</a>
-```
+Serve solo che la ricerca sia attiva (`search: true` in `_quarto.yml`, è il default): il pulsante nell'intestazione lo genera il tema.
 
 Si può aprire anche da codice con `window.biOpenSearch()`.
 
-Perché l'indicizzazione funzioni, il contenuto deve stare dentro un `<main>`: Quarto indicizza solo quello che trova lì.
+## Intestazione, menu e piè di pagina
 
-## Struttura richiesta dai partial
+Nel progetto non si scrive HTML: il tema genera tutto da `_quarto.yml`, sui siti (`project: type: website`). Un documento singolo non ha né intestazione né piè di pagina.
 
-I partial dello starter aprono, alla fine dell'header, questa struttura, e la chiudono all'inizio del footer:
+```yaml
+website:
+  title: "Nome del sito"
+  search: true
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - text: Novità
+        menu:
+          - text: Notizie
+            href: notizie/index.qmd
+  page-footer:
+    center:
+      - text: Note legali
+        href: note-legali.qmd
 
-```html
-<div id="quarto-content">
-<main id="main-content" class="content container my-5">
+bootstrap-italia:
+  ente:
+    text: Ente di appartenenza
+    href: https://www.example.org
+  istituzione: Nome dell'Istituzione
+  tagline: Il sottotitolo
+  logo: it-pa
+  lingue:
+    - lang: it
+      text: ITA
+      href: index.qmd
+    - lang: en
+      text: ENG
+      href: en/index.qmd
+  footer:
+    - title: Contatti
+      text: |
+        **Nome dell'Istituzione**\\
+        Via Roma 1 - 00100 Città
+    - title: Link utili
+      links:
+        - text: Albo pretorio
+          href: albo.qmd
+    - title: Seguici su
+      social:
+        - icon: it-github
+          text: GitHub
+          href: https://github.com/
 ```
 
-Non è decorativa: Quarto la usa per collocare quello che genera. Senza `<main>` non costruisce l'indice di ricerca; senza `#quarto-content main.content` appende gli elenchi (`listing:`) in fondo al `body`, fuori dal contenitore. Chi scrive partial propri deve mantenerla.
+| Chiave | Cosa produce |
+| --- | --- |
+| `website.navbar` | il menu, con la sintassi standard di Quarto; la voce attiva è calcolata al render |
+| `website.page-footer.center` | i link in fondo alla pagina |
+| `bootstrap-italia.ente`, `lingue` | la barra in alto; il selettore compare solo se ci sono lingue |
+| `bootstrap-italia.istituzione`, `tagline`, `logo` | il marchio; `logo` è un'icona `it-…` o il percorso di un'immagine |
+| `bootstrap-italia.footer` | le colonne del piè di pagina: `text`, `links`, `social` |
+
+`website` si legge direttamente da `_quarto.yml`, perché non arriva ai filtri: i profili e `metadata-files` non lo modificano. `bootstrap-italia` passa invece dai metadati, e li rispetta.
+
+## Notizie e immagini
+
+Le notizie si scrivono con le funzioni native di Quarto: `listing: type: grid` per l'elenco, `categories`, `image` e `image-alt` in front matter. Figure, didascalie e citazioni escono in Markdown con gli stili del design system:
+
+```markdown
+![La sala di lettura.](img/sala.jpg){.rounded fig-alt="Descrizione dell'immagine"}
+
+> Il testo citato.
+>
+> [Nome della fonte]{.blockquote-footer}
+```
+
+Le notizie e le immagini di questo sito sono inventate; le immagini in `notizie/img/` sono generate al computer e servono solo da esempio.
 
 ## Icone
 
@@ -195,7 +249,7 @@ Il report è indipendente dal tema — funziona anche con `theme: none` — quin
 
 ## Verifiche fatte
 
-Su Quarto 1.10.18, Chrome, viewport desktop e 390×844:
+Su Quarto 1.10.18, Chrome, viewport desktop e 390×844 (sulla 1.10.20 l'HTML delle pagine è identico e axe-core, rilanciato, non trova violazioni):
 
 - **accessibilità**: nessuna violazione su tutte le pagine, sia con il report axe integrato di Quarto (WCAG 2.1 AA) sia con axe-core eseguito a mano; ricerca usabile da tastiera (Invio apre, Escape chiude, il focus torna alla lente); skip link funzionante; header istituzionale dentro un landmark `<header>`
 - **validazione HTML**: nessun errore, nessun id duplicato; restano avvisi di `tidy` dovuti agli attributi proprietari di Quarto e ai limiti di `tidy` su SVG

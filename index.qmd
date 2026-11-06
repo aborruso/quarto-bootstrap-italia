@@ -1,12 +1,26 @@
 ---
 title: "Bootstrap Italia per Quarto"
 subtitle: "Il design system .italia per i siti e i documenti generati con Quarto"
+listing:
+  id: ultime-notizie
+  contents: "notizie/2*.qmd"
+  type: grid
+  grid-columns: 3
+  sort: "date desc"
+  max-items: 3
+  date-format: "D MMM YYYY"
+  fields: [image, categories, date, title, description]
 ---
 
 ::: {.callout-note title="Questo sito è l'esempio del tema"}
 Intestazione, menu e piè di pagina sono quelli di un ente fittizio: servono a mostrare come si
 comporta il tema in un sito istituzionale. Il progetto è
-[quarto-bootstrap-italia](https://github.com/aborruso/quarto-bootstrap-italia).
+[quarto-bootstrap-italia](https://github.com/aborruso/quarto-bootstrap-italia). Notizie, testi e immagini sono inventati.
+:::
+
+## Ultime notizie
+
+::: {#ultime-notizie}
 :::
 
 ## Quarto in breve
@@ -126,7 +140,7 @@ non passa, il sito non viene pubblicato.
 ::: {.card-body}
 ### Icone senza percorsi
 Lo sprite è già nella pagina: un'icona si richiama con
-<code>&lt;use href="#it-search"&gt;</code> e funziona da qualunque sottocartella.
+`<use href="#it-search">` e funziona da qualunque sottocartella.
 :::
 :::
 :::

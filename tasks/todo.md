@@ -146,9 +146,9 @@ Principio: chi scrive usa Quarto come ogni giorno, il tema fa il resto. Nessuna 
 
 - [ ] Pagine `about`, modalità scura, stampa, browser diversi da Chrome
 - [ ] **Ricerca**: il ranking è elementare (sottostringa, niente fuzzy né stemming) e non evidenzia i termini trovati
-- [ ] **Bootstrap Italia 3.x**: oggi in beta (3.0.0-beta.4), da affrontare quando esce stabile
+- [ ] **Bootstrap Italia 3.x**: oggi in beta (3.0.0-beta.8 del 2026-11-05), da affrontare quando esce stabile
 - [ ] Il partial `title-block.html` è essenziale: non mostra autori con ORCID né altri metadati ricchi. Da estendere se servirà
-- [ ] `quarto-required: ">=1.10.0"` è prudenziale: verificato solo su 1.10.18, non si sa da quale versione funzionino `at: pre-ast` e `quarto.project.offset`
+- [ ] `quarto-required: ">=1.10.0"` è prudenziale: verificato su 1.10.18 e 1.10.20, non si sa da quale versione funzionino `at: pre-ast` e `quarto.project.offset`
 
 ## Review
 
@@ -187,3 +187,20 @@ quarto/                           installazione locale, esclusa da git e dal ren
 ```
 
 Il sito va guardato via HTTP, non con `file://`.
+
+## Fase — Header, menu e footer generati da Quarto
+
+Requisito: nessun HTML scritto a mano nel progetto di chi usa il tema. La configurazione sta in `_quarto.yml`; il markup di Bootstrap Italia lo produce l'estensione.
+
+Prototipo del 2026-11-06 su Quarto 1.10.20: `website` non arriva ai filtri, ma il filtro legge `_quarto.yml` da `quarto.project.directory`, calcola i link con `quarto.project.offset` e la voce attiva con `quarto.doc.input_file`. Una chiave propria (`bootstrap-italia:`) arriva in `meta`.
+
+- [x] Nuovo filtro `bootstrap-italia-chrome.lua` che genera skiplink, header, menu e footer (2026-11-06; confronto con l'HTML dei partial: spariscono solo «Accedi» e lo script)
+- [x] Menu da `website.navbar`, voce attiva al render: `aria-current="page"` su `eventi.html`
+- [x] Dati dell'ente, lingue e footer sotto `bootstrap-italia:`, link legali da `website.page-footer.center`; `logo` icona o immagine, il caso immagine non è ancora provato
+- [x] `<main>` generato dal filtro: `search.json` ha tutte le pagine, ricerca provata via HTTP
+- [x] Rimossi `partials/header.html`, `partials/footer.html` e gli `include-*`
+- [x] Tolto l'HTML grezzo da `index.qmd`
+- [x] Aggiornati `README.md` e `installazione.qmd`; manca la prova di `quarto use template` da zero, già in [#1](https://github.com/aborruso/quarto-bootstrap-italia/issues/1)
+- [x] axe senza violazioni sulle pagine (13), menu mobile provato; tastiera non riprovata, CI da verificare al push
+
+Decisioni prese il 2026-11-06: menu da `website.navbar` letto dal file, lingua configurabile, niente «Accedi», nessuna intestazione sui documenti singoli.
