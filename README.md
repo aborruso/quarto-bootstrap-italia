@@ -194,6 +194,8 @@ Testo del callout.
 
 Un filtro Lua li riscrive con il markup di Bootstrap Italia, che è diverso da quello di Bootstrap: le varianti sono `note`, `important`, `warning`, `success`, `danger` — non `callout-warning` — e il box con il bordo colorato lo disegna `callout-inner`. La mappatura è `note → note`, `tip → success`, `warning → warning`, `caution → important`, `important → danger`.
 
+Un callout con un identificatore si richiama come una figura: `::: {#tip-uno .callout-tip}` e nel testo `@tip-uno`, che diventa «Suggerimento 1». I prefissi sono `nte-`, `tip-`, `wrn-`, `cau-` e `imp-`, e il riferimento vale nella stessa pagina. Le etichette sono in italiano; si cambiano con `language: crossref-tip-prefix:` e simili.
+
 Un div fenced con classe `callout` scritto a mano viene invece intercettato dai callout nativi di Quarto e trasformato in un blockquote: se serve il markup grezzo, va messo in un blocco ```` ```{=html} ````.
 
 ## Colori istituzionali

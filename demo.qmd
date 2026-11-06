@@ -277,6 +277,14 @@ flowchart LR
   B -->|no| D[Modulo pubblico]
 ```
 
+## Riferimenti ai callout
+
+Un callout con un identificatore si richiama nel testo come una figura: si scrive `@tip-esempio` e si ottiene @tip-esempio.
+
+::: {#tip-esempio .callout-tip title="Un callout con riferimento"}
+L'etichetta nel titolo e il numero vengono da soli. I prefissi sono `nte-`, `tip-`, `wrn-`, `cau-` e `imp-`.
+:::
+
 ## Codice eseguito
 
 Tabelle, grafici e output di celle eseguite stanno in due pagine a parte, una per motore: [Python con Jupyter](dati-python.qmd) e [R con knitr](dati-r.qmd).

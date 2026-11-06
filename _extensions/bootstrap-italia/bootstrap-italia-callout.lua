@@ -1,110 +1,73 @@
 --[[
   Callout di Quarto resi con il markup di Bootstrap Italia.
 
-  Nel Markdown si scrive la sintassi standard di Quarto:
-
-      ::: {.callout-warning}
-      ## Titolo
-      Testo del callout.
-      :::
-
-  e in output esce un callout del design system:
-
-      <div class="callout warning">
-        <div class="callout-inner">
-          <div class="callout-title">…</div>
-          …
-        </div>
-      </div>
-
-  Il filtro gira `at: pre-ast`, cioè prima dei filtri di Quarto: senza il suo
-  tema Bootstrap, Quarto degraderebbe i callout a blockquote.
+  Il filtro gira `at: post-quarto`: Quarto ha già costruito il callout e registrato
+  i riferimenti incrociati (`@tip-uno`), e qui se ne decide solo il disegno.
 ]]
 
 local VARIANTI = {
-  ['callout-note'] = { variante = 'note', icona = 'it-info-circle', titolo = 'Nota' },
-  ['callout-tip'] = { variante = 'success', icona = 'it-check-circle', titolo = 'Suggerimento' },
-  ['callout-warning'] = { variante = 'warning', icona = 'it-warning-circle', titolo = 'Attenzione' },
-  ['callout-caution'] = { variante = 'important', icona = 'it-error', titolo = 'Avvertenza' },
-  ['callout-important'] = { variante = 'danger', icona = 'it-close-circle', titolo = 'Importante' },
+  note = { variante = 'note', icona = 'it-info-circle', titolo = 'Nota', prefisso = 'nte' },
+  tip = { variante = 'success', icona = 'it-check-circle', titolo = 'Suggerimento', prefisso = 'tip' },
+  warning = { variante = 'warning', icona = 'it-warning-circle', titolo = 'Attenzione', prefisso = 'wrn' },
+  caution = { variante = 'important', icona = 'it-error', titolo = 'Avvertenza', prefisso = 'cau' },
+  important = { variante = 'danger', icona = 'it-close-circle', titolo = 'Importante', prefisso = 'imp' },
 }
 
-local function variante_di(div)
-  for _, classe in ipairs(div.classes) do
-    if VARIANTI[classe] then
-      return classe, VARIANTI[classe]
-    end
-  end
-  return nil, nil
-end
-
--- il titolo può stare nell'attributo title= oppure nel primo heading del div
-local function estrai_titolo(div, predefinito)
-  if div.attributes['title'] then
-    return div.attributes['title'], div.content
-  end
-  local blocchi = div.content
-  if #blocchi > 0 and blocchi[1].t == 'Header' then
-    local titolo = pandoc.utils.stringify(blocchi[1].content)
-    local resto = pandoc.List()
-    for i = 2, #blocchi do
-      resto:insert(blocchi[i])
-    end
-    return titolo, resto
-  end
-  return predefinito, blocchi
-end
-
--- gli attributi che Quarto documenta per i callout, oltre a title:
---   collapse="true|false"  richiudibile (chiuso o già aperto)
---   icon="false"           senza icona
---   appearance="simple|minimal"  versione senza riquadro; minimal è anche senza icona
-local function falso(v)
-  return v == 'false' or v == '0'
-end
-
 local progressivo = 0
+local numeri = {}
 
-function Div(div)
+local function html_inline(titolo)
+  local documento = pandoc.Pandoc({ pandoc.Plain(quarto.utils.as_inlines(titolo)) })
+  return (pandoc.write(documento, 'html'):gsub('^%s+', ''):gsub('%s+$', ''))
+end
+
+local function ha_titolo(node)
+  return node.title ~= nil and pandoc.utils.stringify(node.title) ~= ''
+end
+
+-- con un id di riferimento il titolo porta l'etichetta a cui rimanda il testo:
+-- «Suggerimento 1: titolo», come nel tema di Quarto
+local function titolo_di(node, def)
+  local id = node.attr.identifier or ''
+  local proprio = ha_titolo(node) and html_inline(node.title) or nil
+  if id:match('^' .. def.prefisso .. '%-') then
+    numeri[def.prefisso] = (numeri[def.prefisso] or 0) + 1
+    local etichetta = def.titolo .. ' ' .. numeri[def.prefisso]
+    return proprio and (etichetta .. ': ' .. proprio) or etichetta
+  end
+  return proprio or def.titolo
+end
+
+function Callout(node)
   if not quarto.doc.is_format('html:js') then
     return nil
   end
-
-  local classe, def = variante_di(div)
+  local def = VARIANTI[node.type]
   if not def then
     return nil
   end
 
-  local titolo, contenuto = estrai_titolo(div, def.titolo)
+  local id = node.attr.identifier or ''
+  local aspetto = node.appearance
+  local titolo = titolo_di(node, def)
 
-  local aspetto = div.attributes['appearance']
-  local collapse = div.attributes['collapse']
-  local con_icona = not falso(div.attributes['icon']) and aspetto ~= 'minimal'
-
-  -- le classi diverse da callout-* restano sull'elemento esterno
-  local extra = pandoc.List()
-  for _, c in ipairs(div.classes) do
-    if c ~= classe and c ~= 'callout' then
-      extra:insert(c)
+  local classi = pandoc.List({ 'callout', def.variante })
+  -- il callout senza riquadro del design system è .callout-highlight
+  if aspetto == 'simple' or aspetto == 'minimal' then
+    classi:insert('callout-highlight')
+  end
+  for _, c in ipairs(node.attr.classes or {}) do
+    if not c:match('^callout') then
+      classi:insert(c)
     end
   end
 
-  local id = div.identifier ~= '' and (' id="' .. div.identifier .. '"') or ''
-  local classi = 'callout ' .. def.variante
-  -- il callout senza riquadro del design system è .callout-highlight
-  if aspetto == 'simple' or aspetto == 'minimal' then
-    classi = classi .. ' callout-highlight'
-  end
-  if #extra > 0 then
-    classi = classi .. ' ' .. table.concat(extra, ' ')
-  end
-
-  local icona = con_icona
+  local icona = (node.icon ~= false and aspetto ~= 'minimal')
     and ('<svg class="icon" aria-hidden="true"><use href="#' .. def.icona .. '"></use></svg>')
     or ''
 
   local apertura = pandoc.List({
-    '<div class="' .. classi .. '"' .. id .. '>',
+    '<div class="' .. table.concat(classi, ' ') .. '"' .. (id ~= '' and (' id="' .. id .. '"') or '') .. '>',
     '<div class="callout-inner">',
     '<div class="callout-title">',
     icona,
@@ -114,11 +77,12 @@ function Div(div)
   local chiusura = pandoc.List({ '</div>', '</div>' })
 
   -- richiudibile: il collapse di Bootstrap Italia, con il pulsante del design system
+  local collapse = node.collapse
   if collapse ~= nil then
     progressivo = progressivo + 1
-    local base = (div.identifier ~= '' and div.identifier or 'callout') .. '-' .. progressivo
+    local base = (id ~= '' and id or 'callout') .. '-' .. progressivo
     local corpo, intestazione = base .. '-corpo', base .. '-toggle'
-    local aperto = falso(collapse)
+    local aperto = collapse == false or tostring(collapse) == 'false'
     apertura:extend({
       '<div class="collapse-div">',
       '<div class="collapse-header" id="' .. intestazione .. '">',
@@ -133,8 +97,8 @@ function Div(div)
     chiusura = pandoc.List({ '</div>', '</div>', '</div>', '</div>', '</div>' })
   end
 
-  local risultato = pandoc.List({ pandoc.RawBlock('html', table.concat(apertura, '\n')) })
-  risultato:extend(contenuto)
+  local risultato = pandoc.Blocks({ pandoc.RawBlock('html', table.concat(apertura, '\n')) })
+  risultato:extend(quarto.utils.as_blocks(node.content))
   risultato:insert(pandoc.RawBlock('html', table.concat(chiusura, '\n')))
   return risultato
 end

@@ -13,6 +13,13 @@ contributes:
       html-math-method: mathml
       anchor-sections: false
       date-format: long
+      # l'etichetta dei riferimenti ai callout (@tip-uno), che Quarto non traduce
+      language:
+        crossref-nte-prefix: Nota
+        crossref-tip-prefix: Suggerimento
+        crossref-wrn-prefix: Attenzione
+        crossref-cau-prefix: Avvertenza
+        crossref-imp-prefix: Importante
       css:
         # Bootstrap Italia con i colori esposti come variabili CSS (--bi-…),
         # generato da scripts/genera-token.py
@@ -27,13 +34,13 @@ contributes:
         # {{< icona it-file >}} al posto dell'SVG scritto a mano
         - bootstrap-italia-shortcodes.lua
       filters:
-        # i callout di Quarto resi con il markup di Bootstrap Italia, prima che
-        # Quarto li degradi a blockquote (senza il suo tema non li sa disegnare)
-        - at: pre-ast
-          path: bootstrap-italia-callout.lua
         # code-fold anche sui blocchi di codice scritti a mano, non solo sulle celle
         - at: pre-ast
           path: bootstrap-italia-code.lua
+        # i callout di Quarto resi con il markup di Bootstrap Italia: gira dopo la
+        # registrazione dei riferimenti incrociati, che così restano validi
+        - at: post-quarto
+          path: bootstrap-italia-callout.lua
         # JavaScript del design system, sprite delle icone, ricerca, raccordo del
         # markup dei componenti. Gira a valle di tutto: prima gli shortcode sono
         # ancora segnaposto e il markup non è quello definitivo.
