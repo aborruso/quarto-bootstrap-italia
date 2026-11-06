@@ -1,0 +1,35 @@
+---
+title: "Notizie"
+subtitle: "Le notizie, i comunicati e gli avvisi per restare aggiornati su quello che succede sul territorio"
+listing:
+  - id: in-evidenza
+    contents: "2*.qmd"
+    type: grid
+    grid-columns: 3
+    sort: "date desc"
+    max-items: 3
+    include:
+      evidenza: true
+    date-format: "D MMM YYYY"
+    fields: [image, categories, date, title, description]
+  - id: tutte
+    contents: "2*.qmd"
+    type: grid
+    grid-columns: 3
+    sort: "date desc"
+    page-size: 6
+    sort-ui: false
+    filter-ui: true
+    date-format: "D MMM YYYY"
+    fields: [image, categories, date, title, description]
+---
+
+## In evidenza
+
+::: {#in-evidenza}
+:::
+
+## Tutte le novità
+
+::: {#tutte}
+:::

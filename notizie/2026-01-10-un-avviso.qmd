@@ -1,0 +1,12 @@
+---
+title: "Un avviso di esempio"
+date: 2026-01-10
+categories: [Avvisi]
+description: "Le categorie compaiono sopra il titolo."
+---
+
+Il testo dell'avviso.
+
+::: {.callout-warning title="Attenzione"}
+Un riquadro per le informazioni da non perdere.
+:::

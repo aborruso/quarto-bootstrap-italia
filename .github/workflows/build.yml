@@ -38,7 +38,18 @@ jobs:
         run: python3 scripts/controlla-colori.py
 
       - name: Render del sito
-        run: quarto render
+        run: quarto render _demo
+
+      - name: Lo starter si installa e si rende
+        run: |
+          mkdir "$RUNNER_TEMP/starter"
+          cd "$RUNNER_TEMP/starter"
+          quarto use template "$GITHUB_WORKSPACE" --no-prompt
+          quarto render
+          grep -q 'class="it-header-wrapper"' _site/index.html
+          grep -q 'quarto-grid-item' _site/notizie/index.html
+          if test -e _demo; then echo "FALLITO il sito dimostrativo finisce nel template"; exit 1; fi
+          echo "ok      starter installato e reso"
 
       - name: Controlli di regressione sull'output
         run: |
@@ -54,35 +65,35 @@ jobs:
           }
 
           # gli asset del design system devono essere collegati e copiati
-          verifica _site/index.html 'bootstrap-italia-tokens.min.css' 'CSS di Bootstrap Italia collegato'
-          verifica _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/bootstrap-italia/css/bootstrap-italia-tokens.min.css \
+          verifica _demo/_site/index.html 'bootstrap-italia-tokens.min.css' 'CSS di Bootstrap Italia collegato'
+          verifica _demo/_site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/bootstrap-italia/css/bootstrap-italia-tokens.min.css \
             'var(--bi-primary' 'colori esposti come variabili CSS'
-          verifica _site/index.html 'bootstrap-italia.bundle.min.js' 'JavaScript del design system collegato'
-          verifica _site/index.html '<symbol id="it-pa"' 'sprite delle icone inserito nella pagina'
+          verifica _demo/_site/index.html 'bootstrap-italia.bundle.min.js' 'JavaScript del design system collegato'
+          verifica _demo/_site/index.html '<symbol id="it-pa"' 'sprite delle icone inserito nella pagina'
           # intestazione e menu generati da _quarto.yml
-          verifica _site/eventi.html 'class="it-header-wrapper"' 'intestazione generata'
-          verifica _site/eventi.html 'aria-current="page"' 'voce di menu attiva calcolata al render'
-          verifica _site/notizie/index.html 'href="../eventi.html"' 'link del menu relativi alla sottocartella'
-          verifica _site/notizie/index.html 'quarto-grid-item' 'notizie in griglia'
-          verifica _site/demo.html 'href="#tip-esempio" class="quarto-xref"' 'riferimento a un callout risolto'
+          verifica _demo/_site/eventi.html 'class="it-header-wrapper"' 'intestazione generata'
+          verifica _demo/_site/eventi.html 'aria-current="page"' 'voce di menu attiva calcolata al render'
+          verifica _demo/_site/notizie/index.html 'href="../eventi.html"' 'link del menu relativi alla sottocartella'
+          verifica _demo/_site/notizie/index.html 'quarto-grid-item' 'notizie in griglia'
+          verifica _demo/_site/demo.html 'href="#tip-esempio" class="quarto-xref"' 'riferimento a un callout risolto'
           # pagine con codice eseguito, rese da _freeze senza Python né R
-          verifica _site/dati-python.html 'cell-output-display' 'output di Jupyter da _freeze'
-          verifica _site/dati-r.html 'cell-output-display' 'output di knitr da _freeze'
-          verifica _site/dati-python.html 'tabindex="0"' 'tabelle larghe raggiungibili da tastiera'
-          if grep -l '### ' _site/eventi.html _site/notizie/*.html; then
+          verifica _demo/_site/dati-python.html 'cell-output-display' 'output di Jupyter da _freeze'
+          verifica _demo/_site/dati-r.html 'cell-output-display' 'output di knitr da _freeze'
+          verifica _demo/_site/dati-python.html 'tabindex="0"' 'tabelle larghe raggiungibili da tastiera'
+          if grep -l '### ' _demo/_site/eventi.html _demo/_site/notizie/*.html; then
             echo "FALLITO cancelletti di un titolo rimasti nel testo"; fallito=1
           else
             echo "ok      nessun titolo Markdown rimasto nel testo"
           fi
-          test -f _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/fonts.css \
+          test -f _demo/_site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/fonts.css \
             && echo "ok      fonts.css copiato" \
             || { echo "FALLITO fonts.css non copiato"; fallito=1; }
-          test -d _site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/bootstrap-italia/fonts/Titillium_Web \
+          test -d _demo/_site/site_libs/quarto-contrib/quarto-project/bootstrap-italia/bootstrap-italia/fonts/Titillium_Web \
             && echo "ok      font Titillium Web copiati" \
             || { echo "FALLITO font non copiati"; fallito=1; }
 
           # il Bootstrap di Quarto deve restare fuori
-          if [ -d _site/site_libs/bootstrap ]; then
+          if [ -d _demo/_site/site_libs/bootstrap ]; then
             echo "FALLITO il Bootstrap di Quarto è finito nell'output"
             fallito=1
           else
@@ -90,15 +101,15 @@ jobs:
           fi
 
           # i contenuti Quarto devono uscire con il markup del design system
-          verifica _site/demo.html 'class="callout warning"' 'callout riscritto con il markup di Bootstrap Italia'
-          verifica _site/demo.html '<table class="table' 'classe .table sulle tabelle'
-          verifica _site/demo.html 'numberSource' 'numeri di riga nel codice'
-          verifica _site/notizie/index.html 'quarto-listing' 'listing generato'
+          verifica _demo/_site/demo.html 'class="callout warning"' 'callout riscritto con il markup di Bootstrap Italia'
+          verifica _demo/_site/demo.html '<table class="table' 'classe .table sulle tabelle'
+          verifica _demo/_site/demo.html 'numberSource' 'numeri di riga nel codice'
+          verifica _demo/_site/notizie/index.html 'quarto-listing' 'listing generato'
 
           # il listing deve stare dentro <main>, non appeso al body
           python3 - <<'EOF'
           import sys
-          s = open('_site/notizie/index.html').read()
+          s = open('_demo/_site/notizie/index.html').read()
           apre, chiude, listing = s.find('<main'), s.find('</main>'), s.find('class="quarto-listing')
           if apre < listing < chiude:
               print('ok      listing dentro <main>')
@@ -108,14 +119,14 @@ jobs:
           EOF
 
           # la ricerca deve avere il suo indice
-          test -f _site/search.json && echo "ok      indice di ricerca generato" \
+          test -f _demo/_site/search.json && echo "ok      indice di ricerca generato" \
             || { echo "FALLITO search.json mancante"; fallito=1; }
 
           # nessun id ripetuto nella pagina (lo sprite è escluso: i suoi symbol hanno id propri)
           python3 - <<'EOF'
           import re, collections, pathlib, sys
           errori = 0
-          for f in sorted(pathlib.Path('_site').rglob('*.html')):
+          for f in sorted(pathlib.Path('_demo/_site').rglob('*.html')):
               s = re.sub(r'<svg aria-hidden="true" focusable="false".*?</svg>', '', f.read_text(), flags=re.S)
               dup = [i for i, n in collections.Counter(re.findall(r'\sid="([^"]+)"', s)).items() if n > 1]
               if dup:
@@ -130,7 +141,7 @@ jobs:
       - name: Carica il sito per la pubblicazione
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: _demo/_site
 
   accessibilita:
     name: Accessibilità (WCAG 2.1 AA)
@@ -144,7 +155,7 @@ jobs:
           version: 1.10.20
 
       - name: Render del sito
-        run: quarto render
+        run: quarto render _demo
 
       - name: Installa gli strumenti di controllo
         run: |
@@ -153,7 +164,7 @@ jobs:
 
       - name: Controllo con axe-core
         run: |
-          python3 -m http.server 8080 --directory _site &
+          python3 -m http.server 8080 --directory _demo/_site &
           sleep 3
           node scripts/a11y.mjs \
             http://localhost:8080/index.html \

@@ -1,0 +1,12 @@
+---
+title: "Una prima notizia di esempio"
+date: 2026-01-15
+categories: [Notizie]
+description: "Il testo che compare nell'elenco delle notizie."
+---
+
+Il testo della notizia, in Markdown. Con `image:` nell'intestazione l'immagine compare anche nell'elenco.
+
+> Una citazione.
+>
+> [La fonte]{.blockquote-footer}

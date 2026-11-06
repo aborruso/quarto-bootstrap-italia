@@ -1,78 +1,53 @@
 project:
   type: website
-  output-dir: _site
   # solo le pagine .qmd: README e altri .md del progetto restano fuori dal sito
   render:
     - "*.qmd"
 
 website:
-  title: "Nome dell'Istituzione"
+  title: "Nome dell'ente"
   search: true
+  # il menu, con la sintassi standard di Quarto
   navbar:
     left:
       - text: Home
         href: index.qmd
-      - text: Installazione e uso
-        href: installazione.qmd
-      - text: Amministrazione
-        href: amministrazione.qmd
-      - text: Servizi
-        href: servizi.qmd
-      - text: Novità
-        menu:
-          - text: Notizie
-            href: notizie/index.qmd
-          - text: Eventi
-            href: eventi.qmd
-      - text: Contenuti Quarto
-        href: demo.qmd
+      - text: Notizie
+        href: notizie/index.qmd
+  # i link in fondo alla pagina
   page-footer:
     center:
-      - text: Media policy
-        href: "#"
       - text: Note legali
         href: "#"
-      - text: Privacy policy
-        href: "#"
-      - text: Mappa del sito
+      - text: Privacy
         href: "#"
 
 # ciò che Quarto non prevede: lo legge il tema per l'intestazione e il piè di pagina
 bootstrap-italia:
-  ente:
-    text: Ente di appartenenza
-    href: "#"
-  istituzione: Nome dell'Istituzione
-  tagline: Sito di esempio in Quarto con Bootstrap Italia
-  lingue:
-    - lang: it
-      text: ITA
-      href: index.qmd
-    - lang: en
-      text: ENG
-      href: "#"
+  istituzione: "Nome dell'ente"
+  tagline: "Una frase che descrive l'ente"
+  # l'ente di appartenenza, nella barra in alto
+  # ente:
+  #   text: Regione
+  #   href: https://www.example.org
+  # il logo: un'icona del design system o il percorso di un'immagine
+  logo: it-pa
+  # il selettore di lingua compare solo se ci sono lingue
+  # lingue:
+  #   - lang: it
+  #     text: ITA
+  #     href: index.qmd
+  #   - lang: en
+  #     text: ENG
+  #     href: en/index.qmd
   footer:
     - title: Contatti
-      href: "#"
       text: |
-        **Nome dell'Istituzione**\
-        Via Roma 1 - 00100 Città\
-        Codice fiscale / P. IVA: 00000000000
-    - title: Amministrazione trasparente
-      href: "#"
+        **Nome dell'ente**\
+        Via Roma 1 - 00100 Città
+    - title: Link utili
       links:
-        - text: Albo pretorio
-          href: "#"
-        - text: Bandi e concorsi
-          href: "#"
-    - title: Seguici su
-      href: "#"
-      social:
-        - icon: it-github
-          text: Il progetto su GitHub
-          href: https://github.com/aborruso/quarto-bootstrap-italia
-        - icon: it-designers-italia
-          text: Designers Italia
+        - text: Amministrazione trasparente
           href: "#"
 
 lang: it

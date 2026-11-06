@@ -23,13 +23,13 @@ format:
 
 ## Sito di esempio
 
-Per partire da un sito già impostato, con header e footer istituzionali (una volta pubblicato il repo):
+Per partire da un sito già impostato:
 
 ```bash
 quarto use template aborruso/quarto-bootstrap-italia
 ```
 
-Vengono creati `_quarto.yml` e `index.qmd`: intestazione, menu e piè di pagina nascono dalla configurazione, da adattare al proprio ente.
+Vengono creati l'estensione, un `_quarto.yml` commentato, una home e una pagina di notizie: si cambia il nome dell'ente nel YAML e il sito è pronto. Il sito dimostrativo non viene copiato: sta in [`_demo/`](_demo/) e si vede su <https://aborruso.github.io/quarto-bootstrap-italia/>.
 
 ## Cosa porta con sé
 
@@ -122,11 +122,11 @@ Le notizie si scrivono con le funzioni native di Quarto: `listing: type: grid` p
 > [Nome della fonte]{.blockquote-footer}
 ```
 
-Le notizie e le immagini di questo sito sono inventate; le immagini in `notizie/img/` sono generate al computer e servono solo da esempio.
+Le notizie e le immagini di questo sito sono inventate; le immagini in `_demo/notizie/img/` sono generate al computer e servono solo da esempio.
 
 ## Codice eseguito
 
-Tabelle e grafici di knitr e Jupyter escono con gli stili del design system, nelle pagine [`dati-python.qmd`](dati-python.qmd) e [`dati-r.qmd`](dati-r.qmd). Le due pagine usano `freeze: auto`: il risultato è in `_freeze/`, che va tenuto nel repository, e il sito si rigenera senza Python né R finché il sorgente non cambia. Chi modifica una di quelle pagine deve avere il motore: con Python, `QUARTO_PYTHON` indica l'interprete con `jupyter`, `pandas` e `matplotlib`.
+Tabelle e grafici di knitr e Jupyter escono con gli stili del design system, nelle pagine [`dati-python.qmd`](_demo/dati-python.qmd) e [`dati-r.qmd`](_demo/dati-r.qmd). Le due pagine usano `freeze: auto`: il risultato è in `_freeze/`, che va tenuto nel repository, e il sito si rigenera senza Python né R finché il sorgente non cambia. Chi modifica una di quelle pagine deve avere il motore: con Python, `QUARTO_PYTHON` indica l'interprete con `jupyter`, `pandas` e `matplotlib`.
 
 Due avvertenze per chi scrive:
 
@@ -167,7 +167,7 @@ La sintassi standard di Quarto produce componenti del design system: non serve s
 | `listing:` (elenchi di articoli, notizie, documenti) | elenco con data, titolo e descrizione nello stile del design system |
 | ```` ```{mermaid} ```` | diagrammi, resi da Quarto |
 
-La pagina `demo.qmd` raccoglie tutti questi casi in un unico posto: è il banco di prova da rigenerare quando si aggiorna il tema o Bootstrap Italia, ed è raggiungibile dal menu alla voce «Contenuti Quarto». Fa parte anche del template, come esempio di riferimento: chi non la vuole nel proprio sito cancella `demo.qmd`, la cartella `img/` e la voce di menu in `partials/header.html`.
+La pagina `_demo/demo.qmd` raccoglie tutti questi casi in un unico posto: è il banco di prova da rigenerare quando si aggiorna il tema o Bootstrap Italia, ed è raggiungibile dal menu alla voce «Contenuti Quarto». Fa parte anche del template, come esempio di riferimento: chi non la vuole nel proprio sito cancella `demo.qmd`, la cartella `img/` e la voce di menu in `partials/header.html`.
 
 ## Componenti nel Markdown
 
@@ -250,10 +250,10 @@ title-block-style: none
 
 ## Controllare l'accessibilità
 
-Quarto 1.10 include axe-core (4.10.3) e sa produrre da solo il report di accessibilità, senza rete. Questo repository ha un profilo pronto, `_quarto-a11y.yml`:
+Quarto 1.10 include axe-core (4.10.3) e sa produrre da solo il report di accessibilità, senza rete. Il sito dimostrativo ha un profilo pronto, `_demo/_quarto-a11y.yml`:
 
 ```bash
-quarto render --profile a11y
+quarto render _demo --profile a11y
 ```
 
 Le pagine così generate stampano in console il risultato in JSON, controllato sul livello **WCAG 2.1 AA**. Per vedere le violazioni evidenziate direttamente nella pagina, si cambia `output: json` in `output: document`.
@@ -275,6 +275,16 @@ Due avvertenze di accessibilità che riguardano il **contenuto**, non il tema:
 - un `listing:` usa `<h3>` per i titoli: se nella pagina non c'è un `<h2>` prima, la gerarchia dei titoli risulta saltata
 
 Non ancora verificati: altri browser, stampa, output di codice eseguito (knitr/jupyter), pagine `about`, modalità scura.
+
+## Struttura del repository
+
+| Dove | Cosa |
+| --- | --- |
+| `_extensions/` | il tema, cioè ciò che `quarto add` installa |
+| `_quarto.yml`, `index.qmd`, `notizie/` | lo starter, cioè ciò che `quarto use template` copia insieme al tema |
+| `_demo/` | il sito dimostrativo pubblicato; `_demo/_extensions` è un collegamento simbolico a `_extensions/` |
+
+Il prefisso `_` tiene `_demo/` fuori dal render dello starter. Il sito si genera con `quarto render _demo`. Su Windows il collegamento simbolico richiede `core.symlinks` attivo in Git. Le pagine `_demo/dati-*.qmd` si rendono da `_demo/_freeze/` finché il loro sorgente non cambia.
 
 ## Licenze
 

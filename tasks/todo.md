@@ -161,9 +161,10 @@ _extensions/bootstrap-italia/     ← il tema (si installa con quarto add)
   bootstrap-italia/               dist di Bootstrap Italia 2.18.3
   fonts.css                       @font-face statiche
   quarto-bootstrap-italia.css     raccordo con il markup di Quarto
-_quarto.yml, index.qmd, partials/ ← lo starter (quarto use template)
+_quarto.yml, index.qmd, notizie/ ← lo starter (quarto use template)
+_demo/                            il sito dimostrativo pubblicato
 README.md, LICENSE, .gitignore, .quartoignore
-quarto/                           installazione locale, esclusa da git e dal render
+_quarto-bin/                      installazione locale, esclusa da git e dal render
 ```
 
 **Le quattro trappole**

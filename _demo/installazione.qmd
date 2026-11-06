@@ -71,18 +71,17 @@ Non serve scrivere HTML: intestazione, menu e piè di pagina li genera il tema. 
 
 ## Partire da un sito già pronto
 
-Il modo più rapido è copiare l'esempio, che comprende `_quarto.yml`, la home e una pagina di elenco:
+Il modo più rapido è usare il modello, in una cartella vuota:
 
 ```bash
 quarto use template aborruso/quarto-bootstrap-italia
 ```
 
-Poi si cambiano in `_quarto.yml` il nome dell'ente, le voci di menu, i contatti e i collegamenti del
-piè di pagina.
-
-Il modello arriva con il sito dimostrativo: le notizie e le immagini in `notizie/`, inventate, e le
-pagine `demo.qmd` e `installazione.qmd`. Si cancellano quando non servono più, togliendo anche le
-voci corrispondenti dal menu in `_quarto.yml`. La cartella `img/` serve solo a `demo.qmd`.
+Arrivano l'estensione, un `_quarto.yml` commentato, una home e una pagina di notizie. Si cambiano in
+`_quarto.yml` il nome dell'ente, le voci di menu, i contatti e i collegamenti del piè di pagina, poi
+si scrivono le pagine. Il sito che stai leggendo non viene copiato: i suoi sorgenti, utili come
+esempio, sono nella cartella
+[`_demo`](https://github.com/aborruso/quarto-bootstrap-italia/tree/main/_demo) del repository.
 
 ## Il codice eseguito
 
